@@ -1,0 +1,102 @@
+holdCuttedObject:
+
+// 重置位置
+// if (Input.GetKeyDown(allKeys.resetKey)) {
+//     rotationYOffest = 0;
+//     fartherOrCloserFactor = 1;
+//     picked.transform.localScale = (new Vector3(10, 10, 10));
+//     print("reset");
+// }
+
+// float maximum_scale = Mathf.Max(1, fartherOrCloserFactor * 3 * holdingObject.transform.localScale.x);
+// if (Input.GetKey(allKeys.largerKey)) {
+//     if (holdingObject.transform.localScale.x < maximum_scale)
+//         holdingObject.transform.localScale += (new Vector3(scaleSpeed * Time.deltaTime, scaleSpeed * Time.deltaTime, scaleSpeed * Time.deltaTime));
+// }
+// //变小
+// if (Input.GetKey(allKeys.smallerKey)) {
+//     if (holdingObject.transform.localScale.x > 0.5) {
+//         holdingObject.transform.localScale -= (new Vector3(scaleSpeed * Time.deltaTime, scaleSpeed * Time.deltaTime, scaleSpeed * Time.deltaTime));
+//     }
+// }
+
+//rotationYOffest = rotationYOffest + (float)(rotationSpeed * Time.deltaTime);
+//print(rotationSpeed);
+// picked.transform.eulerAngles = picked.transform.eulerAngles +
+// new Vector3(0, (float)(rotationSpeed * Time.deltaTime), 0);
+
+// picked.transform.eulerAngles = picked.transform.eulerAngles +
+// new Vector3(0, 0, (float)(rotationSpeed * Time.deltaTime));
+
+// else{
+//     // picked.transform.eulerAngles = picked.transform.eulerAngles +
+//     // new Vector3((float)(rotationSpeed * Time.deltaTime), 0, 0);
+//     picked.transform.Rotate(new Vector3(0, 0, 1) * rotationSpeed * Time.deltaTime, Space.World);
+// }
+
+//rotationYOffest = rotationYOffest + (float)(rotationSpeed * Time.deltaTime);
+//print(rotationSpeed);
+// picked.transform.eulerAngles = picked.transform.eulerAngles -
+// new Vector3(0, (float)(rotationSpeed * Time.deltaTime), 0);
+
+// picked.transform.eulerAngles = picked.transform.eulerAngles -
+// new Vector3(0, 0, (float)(rotationSpeed * Time.deltaTime));
+
+// else{
+//     // picked.transform.eulerAngles = picked.transform.eulerAngles -
+//     // new Vector3((float)(rotationSpeed * Time.deltaTime), 0, 0);
+//     picked.transform.Rotate(new Vector3(0, 0, 1) * rotationSpeed * Time.deltaTime * -1, Space.World);
+// }
+
+//Y轴转
+// if (Input.GetKey(allKeys.rotationYKey)) {
+//     rotationYOffest = rotationYOffest + (float)(rotationSpeed * Time.deltaTime);
+//     print(rotationSpeed);
+//     picked.transform.eulerAngles = picked.transform.rotation.eulerAngles +
+//     new Vector3(0, rotationYOffest, rotationZOffest);
+// }
+// //Z轴转
+// if (Input.GetKey(allKeys.rotationZKey)) {
+//     rotationZOffest = rotationZOffest + (float)(rotationSpeed * Time.deltaTime);
+//     print(rotationSpeed);
+// }
+
+//Destroy(ori.GetComponent<Rigidbody>());//.detectCollisions = false;
+
+// if(identify(ori).getRegeditValue("pickUpScale") != null){
+//     ori.transform.localScale *= (float)identify(ori).getRegeditValue("pickUpScale");
+// }
+// else{
+//     ori.transform.localScale *= 1.0f;
+// }
+
+inventory:
+// if (identify(picked).getRegeditValue("pickUpDistance") != null)
+// {
+//     spawnDistance = (float)identify(picked).getRegeditValue("pickUpDistance");                         
+// } else
+// {
+//     spawnDistance = 10;
+/ }
+// if(identify(picked).getRegeditValue("currentFactor")!= null){
+//     fartherOrCloserFactor = (float)identify(picked).getRegeditValue("currentFactor");
+// } else {
+//     fartherOrCloserFactor = 1.0f;
+// }
+//if (status_script.Hands_avaliable()) return;
+
+// if (identify(picked).getRegeditValue("pickUpDistance") != null)
+// {
+//     spawnDistance = (float)identify(picked).getRegeditValue("pickUpDistance");
+                        
+// } else
+// {
+//     spawnDistance = 10;
+// }
+// if(identify(picked).getRegeditValue("currentFactor")!= null){
+//     fartherOrCloserFactor = (float)identify(picked).getRegeditValue("currentFactor");
+// } else {
+//     fartherOrCloserFactor = 1.0f;
+// }
+
+//identify(picked).putRegedit("currentFactor", fartherOrCloserFactor);

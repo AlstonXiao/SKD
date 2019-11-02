@@ -1,0 +1,93 @@
+Key set up:
+
+WASD: Movement
+Q: Gem related
+E: interaction
+R: put in inventory
+Z: scale up
+X: scale down 
+C: Change rotational mode
+V, B: rotation
+Number key: Get things from inventory
+
+----------------------------------------
+RegidedValue:
+
+pickUpScale: default 1
+pickUpDistance: default 20
+minimumDistance: default 0.5
+maximumDistance: default  1.5
+
+----------------------------------------
+Groups:
+
+pickUpAble: things can be picked up
+cutable: things can be cutted
+cutted: things that have been cut
+
+----------------------------------------
+How our core mechanism function
+
+1, It will cut one object group (one object tree) inside the cube
+2, if there are multiple object group, it will randomly select a group to cut
+3, to delete a duplicated object, just put the gem on one part of that object. the WHOLE object group will be deleted
+4, if there are multiple duplicated object group in one gem, it will randomly cut one object group
+5, if there are object can be cut and duplicated object in one gem, it will perfer to cut the object insteat of delete object
+
+----------------------------------------
+Pickup System:
+
+What value it used
+
+----------------------------------------
+Cutted System:
+
+1, Rotation System:
+	Use C to change mode, V to rotate forward and B to rotate backward
+	The rotation effect stays on the object and will not be cancled after putted in the inventory
+	The rotation speed is determind by the "rotationSpeed", usually 
+
+----------------------------------------
+Player Status:
+
+enum System. 
+
+
+
+
+CameraController:
+-let player body move along with the movement of the camera.
+
+CuttedObject:
+-cut objects.
+
+eyeLook:
+-from github
+
+holdCuttedObject:
+-hold and move (closer an farther, rotate) the object cutted by us
+-interact with the inventory to take out and put in.
+-put down the object.
+
+identifier:
+-add, remove, check the group, tag, parameter information (regidit values) of objects.
+
+inventory:
+-the inventory system.
+-put in, take out pickUpObjects and cuttedObjects.
+-interacts with pickUpObject.cs and placeGem.cs
+
+lockSpace:
+-cut an object
+
+pickUpObject:
+-pick up or put down an normal object (not cuttedObject that created after we cut an object)
+-interact with inventory system to put in or take out
+
+placeGem:
+-generate the transparent magic cube player use to cut other objects.
+
+player_status:
+-staus of the player (hand)
+
+
