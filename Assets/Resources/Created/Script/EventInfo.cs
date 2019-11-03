@@ -16,3 +16,7 @@ public class UnitDeathEventInfo : EventInfo {
 public class NoInfo : EventInfo {
     
 }
+
+public class doorTextInfo : EventInfo {
+    
+}

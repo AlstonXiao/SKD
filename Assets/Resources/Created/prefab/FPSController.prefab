@@ -66,12 +66,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsWalking: 0
-  m_WalkSpeed: 15
-  m_RunSpeed: 25
+  m_WalkSpeed: 7
+  m_RunSpeed: 12
   m_RunstepLenghten: 0.7
-  m_JumpSpeed: 16
+  m_JumpSpeed: 17
   m_StickToGroundForce: 10
-  m_GravityMultiplier: 4
+  m_GravityMultiplier: 6
   m_MouseLook:
     XSensitivity: 2
     YSensitivity: 2

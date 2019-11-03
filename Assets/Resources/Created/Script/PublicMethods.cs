@@ -18,7 +18,7 @@ namespace publicMethods
     public static class PublicMethods
     {
         public enum Hands {free, pickUpAble, cutted, gem};
-        public enum TypeOfEvent{die, test};
+        public enum TypeOfEvent{die, test, doorText};
         /// <summary>
         /// This method is used to reduce the length of the code. It just simply get the identifier of the object
         /// </summary>
