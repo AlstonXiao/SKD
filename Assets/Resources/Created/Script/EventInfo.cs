@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EventInfo {
     public string EventDescription;
-}
+} 
 
 public class DebugEventInfo : EventInfo {
     public int VerbosityLevel;
@@ -19,4 +19,7 @@ public class NoInfo : EventInfo {
 
 public class doorTextInfo : EventInfo {
     
+}
+public class doortTextInfoOut : EventInfo{
+
 }

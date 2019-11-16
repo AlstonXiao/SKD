@@ -32,15 +32,15 @@ namespace UnityStandardAssets.SceneUtils
             m_SlowMo = !m_SlowMo;
 
             // update button texture
-            var image = button.targetGraphic as Image;
-            if (image != null)
-            {
-                image.sprite = m_SlowMo ? SlowSpeedTex : FullSpeedTex;
-            }
+            //var image = button.targetGraphic as Image;
+            //if (image != null)
+            //{
+            //    image.sprite = m_SlowMo ? SlowSpeedTex : FullSpeedTex;
+            //}
 
-            button.targetGraphic = image;
+            //button.targetGraphic = image;
 
-			Time.timeScale = m_SlowMo ? slowSpeed : fullSpeed;
+			//Time.timeScale = m_SlowMo ? slowSpeed : fullSpeed;
         }
     }
 }
