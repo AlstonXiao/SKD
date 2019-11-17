@@ -22,7 +22,7 @@ public class MovementOfWindCar : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.right * 10 *Time.deltaTime, Space.Self);
+        transform.Rotate(Vector3.up * 10 *Time.deltaTime, Space.Self);
     }
 
 }

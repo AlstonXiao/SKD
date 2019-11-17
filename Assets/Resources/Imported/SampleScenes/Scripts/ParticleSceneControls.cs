@@ -31,8 +31,8 @@ namespace UnityStandardAssets.SceneUtils
         public Text titleText;
         public Transform sceneCamera;
         public Text instructionText;
-        public Button previousButton;
-        public Button nextButton;
+        public UnityEngine.UI.Button previousButton;
+        public UnityEngine.UI.Button nextButton;
         public GraphicRaycaster graphicRaycaster;
         public EventSystem eventSystem;
 
@@ -50,15 +50,15 @@ namespace UnityStandardAssets.SceneUtils
         {
             Select(s_SelectedIndex);
 
-            //previousButton.onClick.AddListener(Previous);
-            //nextButton.onClick.AddListener(Next);
+            previousButton.onClick.AddListener(Previous);
+            nextButton.onClick.AddListener(Next);
         }
 
 
         private void OnDisable()
         {
-			//previousButton.onClick.RemoveListener (Previous);
-			//nextButton.onClick.RemoveListener (Next);
+			previousButton.onClick.RemoveListener (Previous);
+			nextButton.onClick.RemoveListener (Next);
         }
 
 

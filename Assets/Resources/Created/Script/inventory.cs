@@ -5,12 +5,32 @@ using static publicMethods.PublicMethods;
 
 public class inventory : MonoBehaviour
 {
+    // Singleton
+
+    public static inventory instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of inventory");
+            return;
+        }
+        instance = this;
+    }
+
+
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
+    public int capacity = 9;
+
+
     // Start is called before the first frame update
-    
+
     public GameObject           inventoryField;
 
 
-    List<GameObject>    inventoryList = new List<GameObject>();
+    public List<GameObject>    inventoryList = new List<GameObject>();
     TMPro.TextMeshProUGUI       inventoryText;
     player_status               status_script;
 
@@ -36,6 +56,19 @@ public class inventory : MonoBehaviour
     }
 
     public void putIn(GameObject picked){
+        // Check if full
+        if (inventoryList.Count >= capacity)
+        {
+            Debug.Log("Full inventory");
+            // Could destroy item?
+            return;
+        }
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+
         inventoryList.Add(picked);
         picked.SetActive(false);
         string temp_inventory = "";
@@ -51,6 +84,11 @@ public class inventory : MonoBehaviour
     }
 
     public GameObject takeOut(int j){
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+
         GameObject picked = new GameObject();
         if (inventoryList.Count >= j+1) {
             picked = inventoryList[j]; // take the onject out of the inventory
