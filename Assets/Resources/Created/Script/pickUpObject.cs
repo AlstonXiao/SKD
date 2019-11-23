@@ -86,7 +86,7 @@ public class pickUpObject : MonoBehaviour {
             picked.transform.rotation = this.transform.rotation;
             // if user want to put down the object
             if (Input.GetKeyDown(allKeys.putDown)) {
-
+                
                 Queue<GameObject> waittobeCut = new Queue<GameObject>();
                     Queue<GameObject> originalObjects = new Queue<GameObject>();
                     originalObjects.Enqueue(picked);

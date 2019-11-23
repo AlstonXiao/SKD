@@ -38,8 +38,11 @@ public class Walk : MonoBehaviour
     protected void FixedUpdate()
     {
 
+        if (Cursor.lockState == CursorLockMode.None)
+        {
+            return;
+        }
 
- 
         //CharacterController cc = this.GetComponent<CharacterController>();
         charController = this.GetComponent<CharacterController>();
         float moveHorizontal = Input.GetAxis("Horizontal") * 1.0f * Time.deltaTime;

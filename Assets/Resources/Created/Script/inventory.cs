@@ -57,16 +57,12 @@ public class inventory : MonoBehaviour
 
     public void putIn(GameObject picked){
         // Check if full
+        Debug.Log("put in");
         if (inventoryList.Count >= capacity)
         {
             Debug.Log("Full inventory");
             // Could destroy item?
             return;
-        }
-
-        if (onItemChangedCallback != null)
-        {
-            onItemChangedCallback.Invoke();
         }
 
         inventoryList.Add(picked);
@@ -81,13 +77,14 @@ public class inventory : MonoBehaviour
         inventoryText.text = temp_inventory;
 
         picked = null; //set hand free
-    }
 
-    public GameObject takeOut(int j){
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();
         }
+    }
+
+    public GameObject takeOut(int j){
 
         GameObject picked = new GameObject();
         if (inventoryList.Count >= j+1) {
@@ -100,11 +97,29 @@ public class inventory : MonoBehaviour
                 temp_inventory = temp_inventory + (i + 1) + ", " + identify(inventoryList[i]).getName() + " ";
             }
             inventoryText.text = temp_inventory;
+
+            if (onItemChangedCallback != null)
+            {
+                onItemChangedCallback.Invoke();
+            }
+
             return picked;
         }
         return null;
         
         
+    }
+
+    public void delete(GameObject obj)
+    {
+
+        inventoryList.Remove(obj);
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+
     }
     public int getCount(){
         return inventoryList.Count;

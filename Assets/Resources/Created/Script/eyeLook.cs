@@ -30,7 +30,10 @@ public class eyeLook : MonoBehaviour {
 	
 
 	void Update () {
-
+        if (Cursor.lockState == CursorLockMode.None) 
+        {
+            return;
+        }
 
 		// Do we want to see mouse cursor again?
 		if (Input.GetKey (KeyCode.Escape)) {

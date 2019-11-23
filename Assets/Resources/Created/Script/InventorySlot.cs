@@ -10,8 +10,14 @@ public class InventorySlot : MonoBehaviour
     public Image icon;
     public GameObject removeButton;
 
+    public void delete()
+    {
+        inventory.instance.delete(item);
+    }
+
     public void add(GameObject newItem)
     {
+        Debug.Log("Added");
         item = newItem;
 
         icon.sprite = null;
@@ -29,8 +35,9 @@ public class InventorySlot : MonoBehaviour
         removeButton.SetActive(false);
     }
 
-    public void onRemoveButton()
+    public void selectItem()
     {
-
+        inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item));
+        //inventory.instance.takeOut(inventory.instance.inventoryList.IndexOf(item));
     }
 }
