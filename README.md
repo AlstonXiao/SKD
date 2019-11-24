@@ -1,4 +1,4 @@
-# SKD Game Develop Group
+# SKD Game Develop Team
 <p style="color:grey">Note: We are not using github to do version control so the the version on Github may not be the latest version</p>
 
 ![Chapter one of the game (In development)](./Github_ReadME_Source/Game_Overview.png)
@@ -39,8 +39,8 @@ This demo is very simple. You need to open the door by pushing two buttons at th
 ![Put it at the right place](./Github_ReadME_Source/Place_Space.png)
 # About the team
 ## Team Member
-* **Team Leader:** Yan Xiao @AlstonXiao yxiao65@wisc.edu
-* **Team Member:** Yuzhe Gu @REEEYZ
-* **Team Member:** Tianyiao Ren (Rae) @tyrrr110
+* **Team Leader:** Yan Xiao, yxiao65@wisc.edu
+* **Team Member:** Yuzhe Gu 
+* **Team Member:** Tianyiao Ren (Rae) 
 * **Team Member:** Roland Jiang
 ### Special Thanks To: Xiao Fei, Yuxuan Shao, Zhaoqing CUi
