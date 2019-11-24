@@ -1,7 +1,7 @@
 # SKD Game Develop Group
 <p style="color:grey">Note: We are not using github to do version control so the the version on Github may not be the latest version</p>
 
-[A picture of the game]
+![Chapter one of the game (In development)](./Github_ReadME_Source/Game Overview.png)
 
 ## Background Story
 This game takes place in the far future. At that time, humans have run out of resources and you, the main character was sent to find more energy sources. One day, you suddenly found a strong signal of energy underneath the ground. You decided to explore, but after you enter the underground, you discovered that there is a ruin of a huge world, and the signal is emitted from the deepest part of the ruin. Unfortunately, you lost all your advanced tools when you get to the underground world, and the path to the deepest part is blocked. So you have to use the power of the artifact to get to the resource that emits the signal. But, who knows what will happen when you get there.
