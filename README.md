@@ -38,9 +38,16 @@ This demo is very simple. You need to open the door by pushing two buttons at th
 5. To place the object, press `E`
 ![Put it at the right place](./Github_ReadME_Source/Place_Space.png)
 # About the team
+We are students at University of Wisconsin - Madison and this game is one of our side projects.  
 ## Team Member
 * **Team Leader:** Yan Xiao, yxiao65@wisc.edu
 * **Team Member:** Yuzhe Gu 
 * **Team Member:** Tianyiao Ren (Rae) 
 * **Team Member:** Roland Jiang
 ### Special Thanks To: Xiao Fei, Yuxuan Shao, Zhaoqing CUi
+
+# Disclaimer
+
+The material embodied in this software is provided to you "as-is" and without warranty of any kind, express, implied or otherwise, including without limitation, any warranty of fitness for a particular purpose. The use of this code is your responsibility and at your own risk.
+
+This repository is for nonprofit educational purposes only.
