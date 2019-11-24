@@ -46,7 +46,7 @@ We are students at University of Wisconsin - Madison and this game is one of our
 * **Team Member:** Roland Jiang
 ### Special Thanks To: Xiao Fei, Yuxuan Shao, Zhaoqing CUi
 
-# Disclaimer
+# Disclaimer 
 
 The material embodied in this software is provided to you "as-is" and without warranty of any kind, express, implied or otherwise, including without limitation, any warranty of fitness for a particular purpose. The use of this code is your responsibility and at your own risk.
 
