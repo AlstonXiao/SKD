@@ -14,6 +14,8 @@ This game is a combination of puzzle-solving and storytelling. The alien technol
 ### Example
 
 On the right we have a rotating receiver. We apply the artifact's power to "capture" the space and put it on the left. The copied object now rotates with the old one.
+
+
 ![Duplicated object moves as the original object moves](./Github_ReadME_Source/Connected_Object.gif)
 
 # Current Game Status
