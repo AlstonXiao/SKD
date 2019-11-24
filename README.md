@@ -50,4 +50,4 @@ We are students at University of Wisconsin - Madison and this game is one of our
 
 The material embodied in this software is provided to you "as-is" and without warranty of any kind, express, implied or otherwise, including without limitation, any warranty of fitness for a particular purpose. The use of this code is your responsibility and at your own risk.
 
-This repository is for nonprofit educational purposes only.
+This repository is for nonprofit, educational purposes only. All the files in this repository should not be reused for other purposes outside this repository.
