@@ -39,8 +39,8 @@ This demo is very simple. You need to open the door by pushing two buttons at th
 ![Put it at the right place](./Github_ReadME_Source/Place_Space.png)
 # About the team
 ## Team Member
-* **Team Leader:** Yan Xiao 
-* **Team Member:** Yuzhe Gu 
-* **Team Member:** Tianyiao Ren (Rae)
+* **Team Leader:** Yan Xiao @AlstonXiao yxiao65@wisc.edu
+* **Team Member:** Yuzhe Gu @REEEYZ
+* **Team Member:** Tianyiao Ren (Rae) @tyrrr110
 * **Team Member:** Roland Jiang
 ### Special Thanks To: Xiao Fei, Yuxuan Shao, Zhaoqing CUi
