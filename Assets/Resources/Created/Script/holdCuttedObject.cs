@@ -5,7 +5,8 @@ using static publicMethods.PublicMethods;
 
 public class holdCuttedObject : MonoBehaviour
 {
-    
+    HandSlot handSlot;
+
     public Camera           playerCamera;
     public float            spawnDistance;// distance the object is in front of camera, const to each object
 
@@ -45,18 +46,29 @@ public class holdCuttedObject : MonoBehaviour
     public float            fartherOrCloserFactor = 1;
     public int              rotationMode;
 
-    player_status           status_script;
+    public player_status           status_script;
     inventory               inventory_script;
 
     // Use this for initialization
     void Start () {
+        handSlot = HandSlot.instance;
         status_script = this.GetComponent<player_status>();
         inventory_script = this.GetComponent<inventory>();
         // spawnDistance = 0;
         fartherOrCloserFactor = 1.0f;
 	}
-	
 
+    public static holdCuttedObject instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of holdCuttedObject");
+            return;
+        }
+        instance = this;
+    }
 
 
     // Update is called once per frame
@@ -118,6 +130,7 @@ public class holdCuttedObject : MonoBehaviour
                         holdingObject.GetComponent<CuttedObject>().notIstrigger();
                     }
                     holdingObject = null;
+                    handSlot.clear();
                 }
                 fartherOrCloserFactor = 1;
 
@@ -137,6 +150,9 @@ public class holdCuttedObject : MonoBehaviour
     public void cutSpace(GameObject ori){
         ori.GetComponent<CuttedObject>().istrigger();
         holdingObject = ori;
+
+        handSlot.set(holdingObject);
+
         status_script.Hands_change(Hands.cutted);
         
         if(identify(ori).getRegeditValue("pickUpDistance") != null){

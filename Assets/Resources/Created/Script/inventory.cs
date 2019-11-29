@@ -8,6 +8,7 @@ public class inventory : MonoBehaviour
     // Singleton
 
     public static inventory instance;
+    public HandSlot handSlot;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class inventory : MonoBehaviour
 
     void Start()
     {
+        handSlot = HandSlot.instance;
         inventoryText = inventoryField.GetComponent<TMPro.TextMeshProUGUI>();
         status_script = this.GetComponent<player_status>();
     }
@@ -66,6 +68,8 @@ public class inventory : MonoBehaviour
         }
 
         inventoryList.Add(picked);
+        handSlot.clear();
+
         picked.SetActive(false);
         string temp_inventory = "";
         // generate the text below the screen
@@ -89,7 +93,9 @@ public class inventory : MonoBehaviour
         GameObject picked = new GameObject();
         if (inventoryList.Count >= j+1) {
             picked = inventoryList[j]; // take the onject out of the inventory
+            handSlot.set(inventoryList[j]);
             inventoryList.RemoveAt(j);
+
             picked.SetActive(true);
 
             string temp_inventory = "";

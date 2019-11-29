@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static publicMethods.PublicMethods;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class InventorySlot : MonoBehaviour
 
     public Image icon;
     public GameObject removeButton;
+    HandSlot handSlot;
+    public holdCuttedObject holdCuttedObject;
+
+    private void Start()
+    {
+        handSlot = HandSlot.instance;
+        holdCuttedObject = holdCuttedObject.instance;
+    }
 
     public void delete()
     {
@@ -17,7 +26,6 @@ public class InventorySlot : MonoBehaviour
 
     public void add(GameObject newItem)
     {
-        Debug.Log("Added");
         item = newItem;
 
         icon.sprite = null;
@@ -37,7 +45,20 @@ public class InventorySlot : MonoBehaviour
 
     public void selectItem()
     {
-        inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item));
+        if (!handSlot.isEmpty())
+        {
+            Debug.Log("Swapping objects");
+            //inventory.instance.putIn(handSlot.getItem());
+            holdCuttedObject.GetComponent<inventory>().putIn(handSlot.getItem());
+            while (holdCuttedObject.status_script.Hands_free(Hands.cutted) != true) ;
+            holdCuttedObject.holdingObject = null;
+            holdCuttedObject.fartherOrCloserFactor = 1;
+            inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item));
+            // inventory.instance.takeOut(inventory.instance.inventoryList.IndexOf(item));
+        } else
+        {
+            inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item));
+        }
         //inventory.instance.takeOut(inventory.instance.inventoryList.IndexOf(item));
     }
 }
