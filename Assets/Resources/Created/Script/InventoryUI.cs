@@ -7,6 +7,8 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryUI;
     public Transform itemsParent;
     public KeyCode toggleInventory;
+    public Camera camera;
+    public HandSlot handSlot;
 
     inventory inv;
 
@@ -16,6 +18,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         inv = inventory.instance;
+        handSlot = HandSlot.instance;
         inv.onItemChangedCallback += UpdateUI;
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         //Debug.Log(slots.Length);
@@ -31,10 +34,16 @@ public class InventoryUI : MonoBehaviour
 
             if (inventoryUI.activeSelf)
             {
+                camera.cullingMask = 1 << LayerMask.NameToLayer("UI");
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                // Make a deep copy here
+                GameObject inventoryCopy = Instantiate(handSlot.getItem());
+                inventoryCopy.transform.SetParent(inventoryUI.transform);
+                //inventoryCopy.transform.position = new Vector3();
             } else
             {
+                camera.cullingMask = -1;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
