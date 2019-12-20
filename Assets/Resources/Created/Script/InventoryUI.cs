@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     public KeyCode toggleInventory;
     public Camera camera;
     public HandSlot handSlot;
+    public Canvas canvas;
 
     inventory inv;
 
@@ -39,13 +40,18 @@ public class InventoryUI : MonoBehaviour
                 Cursor.visible = true;
                 // Make a deep copy here
                 GameObject inventoryCopy = Instantiate(handSlot.getItem());
-                inventoryCopy.transform.SetParent(inventoryUI.transform);
-                //inventoryCopy.transform.position = new Vector3();
+
+                // Position is relative to parent (canvas)
+                inventoryCopy.transform.SetParent(canvas.transform);
+                inventoryCopy.transform.localPosition = new Vector3(0, 0, -100);
+                inventoryCopy.layer = LayerMask.NameToLayer("UI");
             } else
             {
                 camera.cullingMask = -1;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                // Remove the duplicate copy
+
             }
         }
     }
