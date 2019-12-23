@@ -90,4 +90,8 @@ placeGem:
 player_status:
 -staus of the player (hand)
 
-
+FirstPersonController:
+	FOVkick: how the field of view changes when player is running
+	MouseLook: enable or disable the cursor and calculate the rotation of the camera
+	headBob: iterator to control the temporary movements
+	lerpbob: movement of the head when landing

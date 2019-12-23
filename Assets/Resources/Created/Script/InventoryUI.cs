@@ -7,7 +7,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryUI;
     public Transform itemsParent;
     public KeyCode toggleInventory;
-    public Camera camera;
+    public Camera Camera;
     public HandSlot handSlot;
     public Canvas canvas;
 
@@ -35,7 +35,7 @@ public class InventoryUI : MonoBehaviour
 
             if (inventoryUI.activeSelf)
             {
-                camera.cullingMask = 1 << LayerMask.NameToLayer("UI");
+                Camera.cullingMask = 1 << LayerMask.NameToLayer("UI");
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 // Make a deep copy here
@@ -47,7 +47,7 @@ public class InventoryUI : MonoBehaviour
                 inventoryCopy.layer = LayerMask.NameToLayer("UI");
             } else
             {
-                camera.cullingMask = -1;
+                Camera.cullingMask = -1;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 // Remove the duplicate copy

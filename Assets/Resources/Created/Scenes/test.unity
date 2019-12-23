@@ -366,7 +366,7 @@ MonoBehaviour:
   inventoryUI: {fileID: 1590793539}
   itemsParent: {fileID: 650152705}
   toggleInventory: 105
-  camera: {fileID: 412475206}
+  Camera: {fileID: 412475206}
   handSlot: {fileID: 0}
   canvas: {fileID: 30961148}
 --- !u!1 &32743824
@@ -2860,7 +2860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.72424704, y: 0}
   m_AnchorMax: {x: 1, y: 0.41242898}
-  m_AnchoredPosition: {x: -270, y: 123.5}
+  m_AnchoredPosition: {x: -270, y: 123.50001}
   m_SizeDelta: {x: 540, y: 247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &650152706
@@ -3596,6 +3596,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: lockableObject
       objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
+      propertyPath: m_TagString
+      value: lockableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
+      propertyPath: m_TagString
+      value: lockableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
+      propertyPath: m_TagString
+      value: lockableObject
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
       propertyPath: m_LocalPosition.x
       value: -54.22602
@@ -3639,18 +3651,6 @@ PrefabInstance:
     - target: {fileID: 400006, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100008, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
-      propertyPath: m_TagString
-      value: lockableObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 100010, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
-      propertyPath: m_TagString
-      value: lockableObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
-      propertyPath: m_TagString
-      value: lockableObject
       objectReference: {fileID: 0}
     - target: {fileID: 6400000, guid: 6bf813a4c2f65674d8a7c67ad0205770, type: 3}
       propertyPath: m_Convex
@@ -4922,7 +4922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 39.199997}
+  m_AnchoredPosition: {x: -100, y: 39.200012}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1749650890
@@ -6175,12 +6175,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7643663357639101156, guid: 77ac750b0e3f3504a9b0b4c06826b18a,
+    - target: {fileID: 3156115022387914303, guid: 77ac750b0e3f3504a9b0b4c06826b18a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2107384598237863016, guid: 77ac750b0e3f3504a9b0b4c06826b18a,
+    - target: {fileID: 7643663357639101156, guid: 77ac750b0e3f3504a9b0b4c06826b18a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6309,7 +6309,7 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3156115022387914303, guid: 77ac750b0e3f3504a9b0b4c06826b18a,
+    - target: {fileID: 2107384598237863016, guid: 77ac750b0e3f3504a9b0b4c06826b18a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
