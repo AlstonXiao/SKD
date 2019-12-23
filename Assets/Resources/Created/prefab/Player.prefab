@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5400000}
   - component: {fileID: 8200000}
   m_Layer: 0
-  m_Name: ModifiedPlayerController
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
+  m_Height: 1.7
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.25
@@ -114,8 +114,8 @@ MonoBehaviour:
       m_RotationOrder: 4
   m_UseHeadBob: 1
   m_HeadBob:
-    HorizontalBobRange: 0.032
-    VerticalBobRange: 0.032
+    HorizontalBobRange: 0.02
+    VerticalBobRange: 0.04
     Bobcurve:
       serializedVersion: 2
       m_Curve:
@@ -129,10 +129,46 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 0.29411456
+        value: 0.2314993
+        inSlope: 2.711212
+        outSlope: 2.711212
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.40405414
+        value: 0.8980669
+        inSlope: 2.9513118
+        outSlope: 2.9513118
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.5
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.0482679
+        outSlope: 0.0482679
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33810377
+        outWeight: 0.19499111
+      - serializedVersion: 3
+        time: 0.59811556
+        value: 0.9031561
+        inSlope: -3.0073543
+        outSlope: -3.0073543
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.69797635
+        value: 0.26609096
+        inSlope: -2.7384107
+        outSlope: -2.7384107
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -147,10 +183,46 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 1.3013169
+        value: -0.30591357
+        inSlope: -2.9248562
+        outSlope: -2.9248562
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.3985108
+        value: -0.90692365
+        inSlope: -2.728806
+        outSlope: -2.728806
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1.5
         value: -1
         inSlope: 0
         outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.59688
+        value: -0.9124925
+        inSlope: 2.8160558
+        outSlope: 2.8160558
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.7006546
+        value: -0.29814404
+        inSlope: 2.8622756
+        outSlope: 2.8622756
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -169,9 +241,9 @@ MonoBehaviour:
       m_RotationOrder: 4
     VerticaltoHorizontalRatio: 1.5
   m_JumpBob:
-    BobDuration: 0.06
+    BobDuration: 0.04
     BobAmount: 0.06
-  m_StepInterval: 5
+  m_StepInterval: 4
   m_FootstepSounds:
   - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
@@ -316,7 +388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
