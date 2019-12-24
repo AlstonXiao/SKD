@@ -12,14 +12,18 @@ namespace UnityStandardAssets.Utility
 
         private float m_Offset = 0f;
 
-
         // provides the offset that can be used
         public float Offset()
         {
             return m_Offset;
         }
+        public void setBob(float Duration, float Amount)
+        {
+            this.BobAmount = Amount;
+            this.BobDuration = Duration;
+        }
 
-
+        
         public IEnumerator DoBobCycle()
         {
             // make the camera move down slightly

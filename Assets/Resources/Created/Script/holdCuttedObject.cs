@@ -130,8 +130,10 @@ public class holdCuttedObject : MonoBehaviour
                         holdingObject.GetComponent<CuttedObject>().notIstrigger();
                     }
                     holdingObject = null;
-                    handSlot.clear();
-                }
+                    if (handSlot != null)
+                    {
+                        handSlot.clear();
+                    }                }
                 fartherOrCloserFactor = 1;
 
             }
@@ -151,7 +153,10 @@ public class holdCuttedObject : MonoBehaviour
         ori.GetComponent<CuttedObject>().istrigger();
         holdingObject = ori;
 
-        handSlot.set(holdingObject);
+        if (handSlot != null)
+        {
+            handSlot.set(holdingObject);
+        }
 
         status_script.Hands_change(Hands.cutted);
         

@@ -42,6 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         private Vector3 speedbeforeJump;
+        private float jump_time;
+        private float default_jump_duration;
+        private float default_jump_amount;
 
         // Use this for initialization
         private void Start()
@@ -56,6 +59,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            default_jump_duration = m_JumpBob.BobDuration;
+            default_jump_amount = m_JumpBob.BobAmount;
         }
 
 
@@ -73,10 +78,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // transition from jumping to ground
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
+                print(jump_time - Time.time);
+                if (Time.time - jump_time < 0.7)
+                {
+                    m_JumpBob.setBob(default_jump_duration, default_jump_amount);
+                } else
+                {
+                    m_JumpBob.setBob(default_jump_duration + (Time.time - jump_time - (float)0.7) * (float)0.2, default_jump_amount + (Time.time - jump_time - (float)0.7) * (float)1);
+                }
                 StartCoroutine(m_JumpBob.DoBobCycle());
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
+            }
+            if (m_PreviouslyGrounded && !m_CharacterController.isGrounded) {
+                jump_time = Time.time;
             }
             // transition from ground to jump, but have not captured by the fix update
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
@@ -123,6 +139,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_MoveDir.y = m_JumpSpeed;
                     PlayJumpSound();
+                    
                     m_Jump = false;
                     m_Jumping = true;
                 }
@@ -140,7 +157,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir.x *= (float)0.85;
                 m_MoveDir.z *= (float)0.85;
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
-                print(m_MoveDir);
+                //print(m_MoveDir);
             }
             // print(m_MoveDir);
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);

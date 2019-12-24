@@ -33,6 +33,7 @@ public class Intro_door_control : MonoBehaviour
     void Update()
     {
         if (rightCube.transform.position.z > rigthOffset) {
+            
             rightActive = true;
         }
         if (leftCube.transform.position.z > leftOffset) {

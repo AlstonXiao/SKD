@@ -115,7 +115,7 @@ MonoBehaviour:
   m_UseHeadBob: 1
   m_HeadBob:
     HorizontalBobRange: 0.02
-    VerticalBobRange: 0.04
+    VerticalBobRange: 0.03
     Bobcurve:
       serializedVersion: 2
       m_Curve:
@@ -129,14 +129,14 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.29411456
-        value: 0.2314993
-        inSlope: 2.711212
-        outSlope: 2.711212
+        time: 0.15458468
+        value: 0.095000766
+        inSlope: 2.295327
+        outSlope: 2.295327
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.43357855
       - serializedVersion: 3
         time: 0.40405414
         value: 0.8980669
@@ -165,13 +165,13 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.69797635
-        value: 0.26609096
-        inSlope: -2.7384107
-        outSlope: -2.7384107
+        time: 0.844641
+        value: 0.09194111
+        inSlope: -1.9347262
+        outSlope: -1.9347262
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.441372
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
@@ -183,13 +183,13 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.3013169
-        value: -0.30591357
-        inSlope: -2.9248562
-        outSlope: -2.9248562
+        time: 1.1485838
+        value: -0.098335534
+        inSlope: -1.9117512
+        outSlope: -1.9117512
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.59283257
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3985108
@@ -219,8 +219,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.7006546
-        value: -0.29814404
+        time: 1.8456742
+        value: -0.11453503
         inSlope: 2.8622756
         outSlope: 2.8622756
         tangentMode: 0
@@ -277,7 +277,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
