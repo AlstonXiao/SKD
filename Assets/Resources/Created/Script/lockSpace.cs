@@ -213,7 +213,6 @@ public class lockSpace : MonoBehaviour {
             resultObject.AddComponent<CuttedObject>();
             resultObject.GetComponent<CuttedObject>().setOriginal(connected);
 
-            resultObject.AddComponent<PickStatus>();
             resultObject.AddComponent<MeshCollider>();
             resultObject.GetComponent<MeshCollider>().convex = true;
             

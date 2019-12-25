@@ -50,19 +50,43 @@ Cutted System:
 ----------------------------------------
 Player Status:
 
-enum System. 
 
+----------------------------------------
+Event System:
+This is a centralized system that can let multiple scripts and object response to one trigger. For example, when the player want to 
+stop the game, the stop can issue an "event" to event manager and event manager will tell all the scripts that listen to this event 
+player has stop the game.
 
+In order to create a event. You need to
+1, Register this event by adding the event name to the enum of PublicMethods.TypeOfEvent
+2, After register this event, you need to create a method in your script that you want to do when this event happened. Using the 
+previous example, when player stop the game, the wind mill will stop rotate. Then you need to create a method in the script that
+controls the wind mill to let it stop. Note: this method must take a EventInfo as a parameter
+3, listen to the event by calling EventManager.startListen(type in step 1, the methods's in step 2)
+4, Then you need to create a children class in EventInfo, and use "your eventInfo : EventInfo" as decoration. This is the information
+that the trigger script want to give. For example, the player want to stop the car, then the you can put "car" in the eventInfo when trigger 
+the event. Then all the method triggered will know you want to stop the car.
+5, To trigger a event, like player press "stop" in the UI. Then the UI script will call EventManager.triggerEvent()
+6, Then the EventManager will call all the listening method and give the eventInfo to each script
 
-
-CameraController:
--let player body move along with the movement of the camera.
+refer to ./Testing Script/Eventsystem/TestTrigger and ./Testing Script/Eventsystem/TestEventListen for an example
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+Brief introduction to each file. Detailed descriptions are included in that file
 
 CuttedObject:
--cut objects.
+-provide funtionality and track objects that have been cut.
 
-eyeLook:
--from github
+energyDetector:
+-calcutate the energy strenghth to guide the player to where he can explore
+
+EventInfo, EventManager:
+-event system
+
+HandSlot:
+-TODO:Roland need to add here
 
 holdCuttedObject:
 -hold and move (closer an farther, rotate) the object cutted by us

@@ -11,11 +11,11 @@ namespace UnityStandardAssets.Cameras
             LateUpdate, // Update in LateUpdate. (for tracking objects that are moved in Update)
             ManualUpdate, // user must call to update camera
         }
-
+#pragma warning disable CS0649
         [SerializeField] protected Transform m_Target;            // The target object to follow
         [SerializeField] private bool m_AutoTargetPlayer = true;  // Whether the rig should automatically target the player.
         [SerializeField] private UpdateType m_UpdateType;         // stores the selected update type
-
+#pragma warning restore CS0649
         protected Rigidbody targetRigidbody;
 
 

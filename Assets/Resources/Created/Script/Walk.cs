@@ -28,9 +28,7 @@ public class Walk : MonoBehaviour
 
     float pushPower = 2.0f;
     private CharacterController charController;
-    private bool m_Jump = false;
-    private bool m_Jumping;
-    private bool m_PreviouslyGrounded;
+
     void Start(){
     }
 

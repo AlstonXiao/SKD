@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using static publicMethods.PublicMethods;
 
+/// <summary>
+/// <para>
+/// This class is used to hold and put up/put down the object generated in the scene and add/remove 
+/// the item in inventory system. We allow the player to adjust its position and rotation carefully.
+/// </para>
+/// Updated: 12/25/2019<para/>
+/// Author: Yan Xiao, Roland<para/>
+/// Attached object: player<para/>
+/// Updates: <para/>
+/// </summary>
 public class holdCuttedObject : MonoBehaviour
 {
     HandSlot handSlot;
@@ -49,7 +59,7 @@ public class holdCuttedObject : MonoBehaviour
     public player_status           status_script;
     inventory               inventory_script;
 
-    // Use this for initialization
+    
     void Start () {
         handSlot = HandSlot.instance;
         status_script = this.GetComponent<player_status>();
@@ -71,7 +81,7 @@ public class holdCuttedObject : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+    
     void Update () {
 
         // This part of code is used to track if user currently is holding a object in his hands
@@ -148,7 +158,7 @@ public class holdCuttedObject : MonoBehaviour
 
 	}
 
-    // waited to be remove
+    // waited to be renamed
     public void cutSpace(GameObject ori){
         ori.GetComponent<CuttedObject>().istrigger();
         holdingObject = ori;
