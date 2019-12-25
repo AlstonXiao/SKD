@@ -28,6 +28,7 @@ We include a very short demo of the game to show the core game mechanism. To run
 
 This demo is very simple. You need to open the door by pushing two buttons at the same time. However, you only have one box and can only push the button once. So what you should do right now?
 
+**Note: please clone this project instead of download it since Github will ignore large files when forming the zip for download**
 ### Tips for control the character
 1. To move around, use `WASD`.
 2. To use the artifact's power, press `Q` then a cube will emerge for you to choose the space to copy.
