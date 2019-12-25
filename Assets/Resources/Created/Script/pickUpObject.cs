@@ -148,19 +148,13 @@ public class pickUpObject : MonoBehaviour {
                             
                         }
                         picked = picked.transform.parent.gameObject;
-                        
-                        //picked.GetComponent<MeshCollider>().isTrigger = false;
-                        //picked.GetComponent<Rigidbody>().detectCollisions = false;
-                        //print(picked.GetComponent<Rigidbody>().detectCollisions);
-                        //TODO
                     }
 
-                    Queue<GameObject> waittobeCut = new Queue<GameObject>();
+                    // disable physics when holding it
                     Queue<GameObject> originalObjects = new Queue<GameObject>();
                     originalObjects.Enqueue(picked);
-                    //waittobeCut.Enqueue(picked);
-                    
-                    // cut all its children
+
+                    // disable the collider of all its children
                     while (originalObjects.Count != 0) {
                         GameObject currentParent = originalObjects.Dequeue();
                         // print(currentParent);
@@ -172,10 +166,6 @@ public class pickUpObject : MonoBehaviour {
                             c.enabled = false;
                         }   
                     }
-                    
-
-
-
                 }
 
             }

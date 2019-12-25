@@ -3132,7 +3132,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.25
+  m_Intensity: 0.67
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4130,7 +4130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 428332813}
-  spawnDistance: 0
   allKeys:
     putDown: 101
     putInInventory: 114
@@ -4138,11 +4137,12 @@ MonoBehaviour:
     rotationF: 118
     rotationB: 98
     resetKey: 0
+  defaultSpawnDistance: 20
   fartherSpeed: 40
   rotationSpeed: 40
-  minimunDistance: 0
   minHoldingDistance: 0.5
   maxHoldingDistance: 3
+  spawnDistance: 0
   holdingObject: {fileID: 0}
   havePicked: 0
   fartherOrCloserFactor: 1

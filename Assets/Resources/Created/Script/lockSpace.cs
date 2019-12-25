@@ -151,7 +151,7 @@ public class lockSpace : MonoBehaviour {
             theparent.AddComponent<Rigidbody>();
             theparent.GetComponent<Rigidbody>().useGravity = false;
             theparent.GetComponent<Rigidbody>().isKinematic = true;
-            hold_script.cutSpace(theparent);
+            hold_script.putCuttedItemToHand(theparent);
             this.transform.parent = parents[0].transform;
             return 0;
 

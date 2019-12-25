@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class provide more detailed physical interation between the player and the world
+/// </summary>
 public class PhysicsOfPlayer : MonoBehaviour
 {
-    public float pushPower;
+    public float pushPower; // how fast can the player push the object
 
+
+    /// <summary>
+    /// This method is called when the player touch an object
+    /// </summary>
+    /// <param name="hit">the collision</param>
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;

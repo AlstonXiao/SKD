@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using static publicMethods.PublicMethods;
 
+/// <summary>
+/// <para>
+/// This class is used to for the inventory
+/// </para>
+/// Author: Yan Xiao, Roland<para/>
+/// Attached object: Player<para/>
+/// updated: <para/>
+/// </summary>
 public class inventory : MonoBehaviour
 {
     // Singleton

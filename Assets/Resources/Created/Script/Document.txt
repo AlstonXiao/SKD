@@ -37,19 +37,34 @@ How our core mechanism function
 ----------------------------------------
 Pickup System:
 
-What value it used
-
+Only pickup and put down. The player cannot change anything. The picked object can be put in inventory.
 ----------------------------------------
 Cutted System:
 
-1, Rotation System:
-	Use C to change mode, V to rotate forward and B to rotate backward
-	The rotation effect stays on the object and will not be cancled after putted in the inventory
-	The rotation speed is determind by the "rotationSpeed", usually 
+PlaceGem: on player, to show the gem in the space. 
+lockspace: When player press the OK key, it will interact with lockspace script on the gem
+HoldCuttedObject: when the cut is finished, return the object to this script on the player (interaction with inventory system)
+CuttedObject: works with the HoldCuttedObject. This script is on that object.
 
+1, Rotation System:
+	Use C to change mode, V to rotate forward and B to rotate backward.
+	The rotation effect stays on the object and will not be cancled after putted in the inventory.
+	The rotation speed is determind by the "rotationSpeed".
+
+2, Position System:
+	The Position is always at the center of the screen. And the distance will be within the 0.5*spawn distance to 2*spawn distance
+	We can change the default spawn distance or the specific spawn distance relates to that object
 ----------------------------------------
 Player Status:
+Hands: switch between several status defined by the enum
 
+----------------------------------------
+Inventory system: works with HoldCuttedObject and pickup object
+TODO: need to add details here
+
+----------------------------------------
+UI system:
+TODO: need to add details here
 
 ----------------------------------------
 Event System:
@@ -71,6 +86,9 @@ the event. Then all the method triggered will know you want to stop the car.
 
 refer to ./Testing Script/Eventsystem/TestTrigger and ./Testing Script/Eventsystem/TestEventListen for an example
 ----------------------------------------
+Public methods:
+identify(gameObject): quickly find the identifier of that object
+
 ----------------------------------------
 ----------------------------------------
 ----------------------------------------
@@ -96,13 +114,28 @@ holdCuttedObject:
 identifier:
 -add, remove, check the group, tag, parameter information (regidit values) of objects.
 
+interface:
+-we should put all interface here. But we don't have any yet.
+
 inventory:
 -the inventory system.
 -put in, take out pickUpObjects and cuttedObjects.
 -interacts with pickUpObject.cs and placeGem.cs
 
+inventory slot, inventory ui:
+-UI system
+
 lockSpace:
--cut an object
+-cut an object, or remove that object
+
+myButton:
+-some sample methods for the button, not used right now
+
+open Door:
+-TODO: comment
+
+Physics Of Player:
+-additional physical interaction to the world
 
 pickUpObject:
 -pick up or put down an normal object (not cuttedObject that created after we cut an object)
@@ -113,6 +146,15 @@ placeGem:
 
 player_status:
 -staus of the player (hand)
+
+public methods:
+-some public methods we want to enable globally and all the enums are here
+
+Receive Movement & Rotation:
+-the parent class for the receiver. provide basic functionality to check if the object has moved or rotated
+
+PickupObject:
+-Pick up the object or drop it or put in inventory.
 
 FirstPersonController:
 	FOVkick: how the field of view changes when player is running

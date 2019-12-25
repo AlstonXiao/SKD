@@ -11,14 +11,14 @@ using static publicMethods.PublicMethods;
 /// Updated: 12/25/2019<para/>
 /// Author: Yan Xiao, Roland<para/>
 /// Attached object: player<para/>
-/// Updates: <para/>
+/// Updates: TODO: Calculate position need to be change since the overall scale of the game has changed<para/>
 /// </summary>
 public class holdCuttedObject : MonoBehaviour
 {
     HandSlot handSlot;
 
     public Camera           playerCamera;
-    public float            spawnDistance;// distance the object is in front of camera, const to each object
+    
 
     [System.Serializable]
     public class keys_for_pickup
@@ -40,25 +40,25 @@ public class holdCuttedObject : MonoBehaviour
     public keys_for_pickup  allKeys;
 
     [Space(10)]
-    // public float scaleSpeed;
+    public float defaultSpawnDistance = 20; // default distance, can be overide in the regidit
     public float fartherSpeed;
     public float rotationSpeed;
-    public float minimunDistance;
 
-    public float minHoldingDistance = 0.5f;
-
+    public float minHoldingDistance = 0.5f; // relative scale
     public float maxHoldingDistance = 2f;
 
 
-    [Header("Debug")]  
+    [Header("Debug")]
+    public float            spawnDistance;// distance the object is in front of camera
     public GameObject       holdingObject = null;
     public bool             havePicked = false;
     public float            fartherOrCloserFactor = 1;
-    public int              rotationMode;
+    public int              rotationMode; // 0 up and down, 1 left and right
 
     public player_status           status_script;
     inventory               inventory_script;
 
+    public static holdCuttedObject instance;
     
     void Start () {
         handSlot = HandSlot.instance;
@@ -68,8 +68,10 @@ public class holdCuttedObject : MonoBehaviour
         fartherOrCloserFactor = 1.0f;
 	}
 
-    public static holdCuttedObject instance;
-
+    
+    /// <summary>
+    /// TODO
+    /// </summary>
     private void Awake()
     {
         if (instance != null)
@@ -88,6 +90,8 @@ public class holdCuttedObject : MonoBehaviour
         if (holdingObject != null){   
             holdingObject.transform.position = CalculatePosition();
 
+            // Rotation of the object 
+            // switch rotation mode
             if (Input.GetKeyDown(allKeys.changeMode)){
                 if(rotationMode == 1){
                     rotationMode = 0;
@@ -117,10 +121,11 @@ public class holdCuttedObject : MonoBehaviour
                 }
             }
 
+            // scale of the object
             if (Input.GetAxis("Mouse ScrollWheel") != 0) {
-                fartherOrCloserFactor = fartherOrCloserFactor + fartherSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime; 
-
-                if(fartherOrCloserFactor < minHoldingDistance)
+                fartherOrCloserFactor = fartherOrCloserFactor + fartherSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
+                // saturated the scale
+                if (fartherOrCloserFactor < minHoldingDistance)
                 {
                     fartherOrCloserFactor = minHoldingDistance;
                 }
@@ -147,7 +152,9 @@ public class holdCuttedObject : MonoBehaviour
                 fartherOrCloserFactor = 1;
 
             }
-            if (Input.GetKeyDown(allKeys.putInInventory)) { // put the cutted object into the inventory
+
+            // put the cutted object into the inventory
+            if (Input.GetKeyDown(allKeys.putInInventory)) { 
                 inventory_script.putIn(holdingObject);
                 while (status_script.Hands_free(Hands.cutted) != true) ;
                 holdingObject = null;
@@ -158,8 +165,11 @@ public class holdCuttedObject : MonoBehaviour
 
 	}
 
-    // waited to be renamed
-    public void cutSpace(GameObject ori){
+    /// <summary>
+    /// This method is called when we want to put a cutted object on the player's hand
+    /// </summary>
+    /// <param name="ori">The cutted object</param>
+    public void putCuttedItemToHand(GameObject ori){
         ori.GetComponent<CuttedObject>().istrigger();
         holdingObject = ori;
 
@@ -174,12 +184,17 @@ public class holdCuttedObject : MonoBehaviour
             spawnDistance = (float)identify(ori).getRegeditValue("pickUpDistance");
         }
         else{
-            spawnDistance = 20;
+            spawnDistance = defaultSpawnDistance;
         }
         fartherOrCloserFactor = 1;
         
     }
 
+    /// <summary>
+    /// This method is called when the player want to take out an object from the inventory. 
+    /// It will take the position as the parameter and get that object in the inventory class
+    /// </summary>
+    /// <param name="num">The position of that object</param>
     public void takeOut(int num)
     {
         if (!status_script.Hands_avaliable()) {
@@ -187,7 +202,7 @@ public class holdCuttedObject : MonoBehaviour
         }
         GameObject ret = this.GetComponent<inventory>().takeOut(num);
         if (ret != null) {
-            cutSpace(ret);
+            putCuttedItemToHand(ret);
         } else {
             print("Error");
         }

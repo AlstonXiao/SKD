@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e455ff756a1e419c3660441d5516a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushPower: 10
+  pushPower: 5
 --- !u!114 &794055087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1025543392}
-  spawnDistance: 0
   allKeys:
     putDown: 101
     putInInventory: 0
@@ -181,11 +180,12 @@ MonoBehaviour:
     rotationF: 118
     rotationB: 98
     resetKey: 0
+  defaultSpawnDistance: 20
   fartherSpeed: 40
   rotationSpeed: 40
-  minimunDistance: 0
   minHoldingDistance: 0.5
   maxHoldingDistance: 3
+  spawnDistance: 0
   holdingObject: {fileID: 0}
   havePicked: 0
   fartherOrCloserFactor: 1

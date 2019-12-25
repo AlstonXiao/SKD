@@ -50,7 +50,7 @@ public class InventorySlot : MonoBehaviour
             Debug.Log("Swapping objects");
             //inventory.instance.putIn(handSlot.getItem());
             holdCuttedObject.GetComponent<inventory>().putIn(handSlot.getItem());
-            while (holdCuttedObject.status_script.Hands_free(Hands.cutted) != true) ;
+            while (holdCuttedObject.status_script.Hands_free(Hands.cutted) != true) ; //TODO by Yan: You need to directly access to the status script but not through the holdcuttedobject
             holdCuttedObject.holdingObject = null;
             holdCuttedObject.fartherOrCloserFactor = 1;
             inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item));

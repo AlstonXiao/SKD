@@ -28,13 +28,16 @@ public class CuttedObject : MonoBehaviour {
      
  	
 	void Start () { 
+        // organize the materials
         Material unable = Resources.Load<Material>("Created/Materials/UnablePutDown");
         originalMaterial = GetComponent<MeshRenderer>().sharedMaterials;
         unables = new Material[this.GetComponent<MeshRenderer>().sharedMaterials.Length];
         for (int i = 0; i < this.GetComponent<MeshRenderer>().sharedMaterials.Length; i++) {
             unables[i] = unable;
         }
+
         collids = new List<GameObject>();
+        // it should never be called
         if (track){
             positionOffset = this.transform.position - original.transform.position;
             rotationOffset = this.transform.eulerAngles - original.transform.eulerAngles;

@@ -88,7 +88,11 @@ public class Identifier : MonoBehaviour {
         return group;
     }
 
-    
+    /// <summary>
+    /// Put a key value pair to the regedit 
+    /// </summary>
+    /// <param name="name">Key</param>
+    /// <param name="value">value</param>
     public void putRegedit(string name, object value) {
         if (regedit.ContainsKey(name)) { 
             regedit.Remove(name);
@@ -96,6 +100,11 @@ public class Identifier : MonoBehaviour {
         regedit.Add(name, value);
     }
 
+    /// <summary>
+    /// Get the key value pair from the regedit by key
+    /// </summary>
+    /// <param name="name">key</param>
+    /// <returns>value</returns>
     public object getRegeditValue(string name) {
         if (!regedit.ContainsKey(name)) {
             return null;
@@ -103,14 +112,26 @@ public class Identifier : MonoBehaviour {
         return regedit[name];
     }
 
+    /// <summary>
+    /// Remove a key value pair in regedit
+    /// </summary>
+    /// <param name="name">key</param>
     public void removeRegedit(string name) {
         regedit.Remove(name);
     }
 
+    /// <summary>
+    /// Get the regedit, We should not call is method
+    /// </summary>
+    /// <returns>regedit</returns>
     public Dictionary<string, object> getRegedit() {
         return regedit;
     }
 
+    /// <summary>
+    /// Make a deep copy of other regedit
+    /// </summary>
+    /// <param name="origin">other regedit</param>
     public void copyIdentifier(Identifier origin) {
         group = new List<string>();
         regedit = new Dictionary<string, object>();
