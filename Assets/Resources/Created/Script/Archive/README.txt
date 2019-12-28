@@ -10,3 +10,7 @@ Reason Archived - we are using the new charactor so this is no longer needed
 Walk:
 -let the player walk.
 Reason Archived - we are using the new charactor so this is no longer needed
+
+CSGw:
+-Split the mesh into faces.
+Reason Archived - We don't need this right now
