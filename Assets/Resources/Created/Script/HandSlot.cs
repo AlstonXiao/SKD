@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// <para>
+/// This class is for single hand slot
+/// </para>
+/// Updated: 1/3/2020<para/>
+/// Author: Roland Jiang<para/>
+/// Attached object: player<para/>
+/// Updates: <para/>
+/// </summary>
 public class HandSlot : MonoBehaviour
 {
-    // Singleton
-
-    public static HandSlot instance;
+    public static HandSlot instance; // Reference to itself
 
     private void Awake()
     {
@@ -16,7 +23,7 @@ public class HandSlot : MonoBehaviour
             Debug.LogWarning("More than one instance of handslot");
             return;
         }
-        instance = this;
+        instance = this; // instantiates itself
     }
 
     public HandSlot()
@@ -25,17 +32,14 @@ public class HandSlot : MonoBehaviour
         instance = this;
     }
 
-    //public delegate void OnHandChanged();
-    //public OnHandChanged onHandChangedCallback;
+    GameObject item; // item in hand slot
 
-    GameObject item;
-
-    public Image icon;
-    public GameObject removeButton;
+    public Image icon; // icon of item
+    public GameObject removeButton; // button for deleting
 
     public void delete()
     {
-        inventory.instance.delete(item);
+        inventory.instance.delete(item); // delete from inventory
     }
 
     public void set(GameObject newItem)
@@ -47,17 +51,12 @@ public class HandSlot : MonoBehaviour
         // Assign to a sprite
         icon.enabled = true;
         removeButton.SetActive(true);
-        //removeButton.interactable = true;
-
-        //if (onHandChangedCallback != null)
-        //{
-        //    onHandChangedCallback.Invoke();
-        //}
 
     }
 
     public void clear()
     {
+        // Clear all
         item = null;
         icon.sprite = null;
         icon.enabled = false;

@@ -13,14 +13,12 @@ using static publicMethods.PublicMethods;
 /// </summary>
 public class inventory : MonoBehaviour
 {
-    // Singleton
-
-    public static inventory instance;
-    public HandSlot handSlot;
+    public static inventory instance; // Reference to itself
+    public HandSlot handSlot; // reference to the slot for hand
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null) // instantiates itself if it's null
         {
             Debug.LogWarning("More than one instance of inventory");
             return;
@@ -29,9 +27,9 @@ public class inventory : MonoBehaviour
     }
 
 
-    public delegate void OnItemChanged();
+    public delegate void OnItemChanged(); // Used for detecting item change and updating UI
     public OnItemChanged onItemChangedCallback;
-    public int capacity = 9;
+    public int capacity = 9; // Max capacity of inventory
 
 
     // Start is called before the first frame update
@@ -66,16 +64,15 @@ public class inventory : MonoBehaviour
     }
 
     public void putIn(GameObject picked){
-        // Check if full
         Debug.Log("put in");
-        if (inventoryList.Count >= capacity)
+        if (inventoryList.Count >= capacity) // Check if full
         {
             Debug.Log("Full inventory");
             // Could destroy item?
             return;
         }
 
-        inventoryList.Add(picked);
+        inventoryList.Add(picked); 
         handSlot.clear();
 
         picked.SetActive(false);
@@ -114,7 +111,7 @@ public class inventory : MonoBehaviour
 
             if (onItemChangedCallback != null)
             {
-                onItemChangedCallback.Invoke();
+                onItemChangedCallback.Invoke(); // update UI
             }
 
             return picked;
@@ -131,7 +128,7 @@ public class inventory : MonoBehaviour
 
         if (onItemChangedCallback != null)
         {
-            onItemChangedCallback.Invoke();
+            onItemChangedCallback.Invoke(); // update UI
         }
 
     }
