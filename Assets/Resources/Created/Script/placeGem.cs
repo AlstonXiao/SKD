@@ -99,9 +99,9 @@ public class placeGem : MonoBehaviour
     /// <returns>the absolute position of the gem in space</returns>
     private Vector3 CalculatePosition()
     {
-        Vector3 playerPos = this.transform.position + new Vector3(0, 4, 0);
+        Vector3 playerPos = this.transform.position + new Vector3(0, 4, 0); //Approximate position of player's eyes
         Vector3 playerDirection = playerCamera.transform.forward;
-        Vector3 spawnPos = playerPos - new Vector3(0, 3, 0) + playerDirection * spawnDistance * fartherOrCloserFactor;
+        Vector3 spawnPos = playerPos - new Vector3(0, 3, 0) + playerDirection * spawnDistance * fartherOrCloserFactor; //The position of gem
         return spawnPos;
     }
 

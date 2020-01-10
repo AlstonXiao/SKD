@@ -6,7 +6,7 @@ using static publicMethods.PublicMethods;
 
 /// <summary>
 /// <para>
-/// This class is used to control the behavior 
+/// This class is used to control the cutting behavior of gem
 /// </para>
 /// Updated: 3/16/2019: add a array that contains all objects that are going to cut<para/>
 /// Author: Yan Xiao, Yuzhe Gu<para/>
