@@ -15,6 +15,7 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public GameObject inventoryUI; // Reference to UI gameObject
+    public static InventoryUI instance; // Reference to itself
     public Transform itemsParent; // 
     public KeyCode toggleInventory; // Making inventory appear and disappear
     public Camera Camera; // Reference to Camera
@@ -27,6 +28,16 @@ public class InventoryUI : MonoBehaviour
     inventory inv; // Reference to actual inventory manager
 
     InventorySlot[] slots; // Array of slots
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of handslot");
+            return;
+        }
+        instance = this; // instantiates itself
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -53,27 +64,51 @@ public class InventoryUI : MonoBehaviour
                 // Unlock cursor so you can move mouse
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                // Make a deep copy of what's in hand slot for displaying
-                inventoryCopy = Instantiate(handSlot.getItem());
-                inventoryCopy.SetActive(true); // Make it appear
-
-                // Position is relative to parent (canvas)
-                inventoryCopy.transform.SetParent(canvas.transform);
-                inventoryCopy.transform.localPosition = new Vector3(0, 0, -100);
-                Quaternion rot = inventoryCopy.transform.parent.rotation; // Get parent rotation
-                inventoryCopy.transform.localRotation = Quaternion.Euler(rot.x - 45, rot.y - 45, rot.z - 45); // Set a fixed rotation
-                inventoryCopy.layer = LayerMask.NameToLayer("UI");
+                createPreview();
             } else
             {
                 Camera.cullingMask = -1; // Show all layers
                 // Lock cursor so you can look around
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                // Remove the duplicate copy
-                inventoryCopy.SetActive(false); // Make it disappear instantly. Faster than destroying
-                Destroy(inventoryCopy, 1.0f);
+                removePreview();
             }
         }
+
+        if (inventoryUI.activeSelf)
+        {
+            if (!handSlot.isEmpty())
+            {
+                // Constantly rotate object
+                inventoryCopy.transform.Rotate(1, 0, 0);
+                if (Input.GetAxis("Mouse ScrollWheel") != 0)
+                {
+                    // Rotate object by scrolling
+                    inventoryCopy.transform.Rotate(0, 4, 0);
+                }
+            }
+        }
+    }
+
+    public void createPreview()
+    {
+        // Make a deep copy of what's in hand slot for displaying
+        inventoryCopy = Instantiate(handSlot.getItem());
+        inventoryCopy.SetActive(true); // Make it appear
+
+        // Position is relative to parent (canvas)
+        inventoryCopy.transform.SetParent(canvas.transform);
+        inventoryCopy.transform.localPosition = new Vector3(0, 0, -100);
+        Quaternion rot = inventoryCopy.transform.parent.rotation; // Get parent rotation
+        inventoryCopy.transform.localRotation = Quaternion.Euler(rot.x - 45, rot.y - 45, rot.z - 45); // Set a fixed rotation
+        inventoryCopy.layer = LayerMask.NameToLayer("UI");
+    }
+
+    public void removePreview()
+    {
+        // Remove the duplicate copy
+        inventoryCopy.SetActive(false); // Make it disappear instantly. Faster than destroying
+        Destroy(inventoryCopy, 1.0f);
     }
 
     void UpdateUI() // Called when change is detected

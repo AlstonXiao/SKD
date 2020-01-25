@@ -17,6 +17,7 @@ public class InventorySlot : MonoBehaviour
 {
     GameObject item; // item in this slot
 
+    public InventoryUI inventoryUI; // Reference to inventoryUI
     public Image icon; // icon of this item (not used yet)
     public GameObject removeButton; // remove button for deleting
     HandSlot handSlot; // Reference to slot
@@ -25,6 +26,7 @@ public class InventorySlot : MonoBehaviour
     private void Start()
     {
         // Instantiates
+        inventoryUI = InventoryUI.instance;
         handSlot = HandSlot.instance;
         holdCuttedObject = holdCuttedObject.instance;
     }
@@ -67,9 +69,11 @@ public class InventorySlot : MonoBehaviour
             holdCuttedObject.fartherOrCloserFactor = 1;
             inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item)); // take out this item from inventory
             // inventory.instance.takeOut(inventory.instance.inventoryList.IndexOf(item));
+            inventoryUI.removePreview();
         } else
         {
             inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item)); // take out this item from inventory
         }
+        inventoryUI.createPreview();
     }
 }
