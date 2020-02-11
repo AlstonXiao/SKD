@@ -106,9 +106,11 @@ public class InventoryUI : MonoBehaviour
 
     public void removePreview()
     {
-        // Remove the duplicate copy
-        inventoryCopy.SetActive(false); // Make it disappear instantly. Faster than destroying
-        Destroy(inventoryCopy, 1.0f);
+        if (inventoryCopy != null) {
+            // Remove the duplicate copy
+            inventoryCopy.SetActive(false); // Make it disappear instantly. Faster than destroying
+            Destroy(inventoryCopy, 1.0f);
+        }
     }
 
     void UpdateUI() // Called when change is detected

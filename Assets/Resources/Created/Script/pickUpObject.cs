@@ -60,6 +60,50 @@ public class pickUpObject : MonoBehaviour {
         this.GetComponent<player_status>().Hands_change(Hands.pickUpAble);
     }
 
+    public void drop()
+    {
+        Debug.Log("Dropping");
+        if (picked != null)
+        {
+            //if (!status_script.Hands_change(Hands.pickUpAble))
+            //{
+            //}
+            //picked.transform.position = CalculatePosition();
+            //picked.transform.rotation = this.transform.rotation;
+
+            Debug.Log("Got to here");
+            Queue<GameObject> waittobeCut = new Queue<GameObject>();
+            Queue<GameObject> originalObjects = new Queue<GameObject>();
+            originalObjects.Enqueue(picked);
+            //waittobeCut.Enqueue(picked);
+
+            // cut all its children
+            while (originalObjects.Count != 0)
+            {
+                GameObject currentParent = originalObjects.Dequeue();
+                // print(currentParent);
+                foreach (Transform childs in currentParent.transform)
+                {
+                    GameObject resultChilds = childs.gameObject;
+                    originalObjects.Enqueue(childs.gameObject);
+                }
+                foreach (Collider c in currentParent.GetComponents<Collider>())
+                {
+                    c.enabled = true;
+                }
+            }
+
+            picked.GetComponent<Rigidbody>().detectCollisions = true;
+            //clear the momentum right before putting the pickup object down
+            picked.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+            picked.GetComponent<Rigidbody>().angularVelocity = new Vector3(0.0f, 0.0f, 0.0f);
+            if (!status_script.Hands_free(Hands.pickUpAble))
+            {
+                print("error");
+            }
+            picked = null;
+        }
+    }
     /// <summary>
     /// This private helper method is used to calculate the position of the holding gem
     /// </summary>

@@ -80,7 +80,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // transition from jumping to ground
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
-                print(jump_time - Time.time);
+                //print(jump_time - Time.time);
                 if (Time.time - jump_time < 0.7)
                 {
                     m_JumpBob.setBob(default_jump_duration, default_jump_amount);

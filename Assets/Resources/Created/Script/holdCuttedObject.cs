@@ -82,6 +82,26 @@ public class holdCuttedObject : MonoBehaviour
         instance = this;
     }
 
+    public void drop()
+    {
+        if (holdingObject.GetComponent<CuttedObject>().putAllowed())
+        {
+            while (status_script.Hands_free(Hands.cutted) != true) ;
+            holdingObject.GetComponent<Rigidbody>().detectCollisions = true;
+            if (holdingObject.GetComponent<CuttedObject>() != null)
+            {
+                holdingObject.GetComponent<CuttedObject>().startTracking();
+                holdingObject.GetComponent<CuttedObject>().notIstrigger();
+            }
+            holdingObject = null;
+            if (handSlot != null)
+            {
+                handSlot.clear();
+            }
+        }
+        fartherOrCloserFactor = 1;
+    }
+
 
     
     void Update () {
@@ -157,6 +177,7 @@ public class holdCuttedObject : MonoBehaviour
             if (Input.GetKeyDown(allKeys.putInInventory)) { 
                 inventory_script.putIn(holdingObject);
                 while (status_script.Hands_free(Hands.cutted) != true) ;
+
                 holdingObject = null;
                 fartherOrCloserFactor = 1;
             }

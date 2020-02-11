@@ -39,7 +39,8 @@ public class HandSlot : MonoBehaviour
 
     public void delete()
     {
-        inventory.instance.delete(item); // delete from inventory
+        //inventory.instance.delete(item); 
+        //pickUpObject.drop();
     }
 
     public void set(GameObject newItem)

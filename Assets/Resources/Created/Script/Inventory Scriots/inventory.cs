@@ -14,6 +14,7 @@ using static publicMethods.PublicMethods;
 public class inventory : MonoBehaviour
 {
     public static inventory instance; // Reference to itself
+    public InventoryUI inventoryUI; // Reference to inventoryUI
     public HandSlot handSlot; // reference to the slot for hand
 
     private void Awake()
@@ -43,6 +44,7 @@ public class inventory : MonoBehaviour
 
     void Start()
     {
+        inventoryUI = InventoryUI.instance;
         handSlot = HandSlot.instance;
         inventoryText = inventoryField.GetComponent<TMPro.TextMeshProUGUI>();
         status_script = this.GetComponent<player_status>();
@@ -67,11 +69,12 @@ public class inventory : MonoBehaviour
         Debug.Log("put in");
         if (inventoryList.Count >= capacity) // Check if full
         {
-            Debug.Log("Full inventory");
+            Debug.Log("Can't put in inventory");
             // Could destroy item?
             return;
         }
 
+        inventoryUI.removePreview();
         inventoryList.Add(picked); 
         handSlot.clear();
 
@@ -97,6 +100,7 @@ public class inventory : MonoBehaviour
 
         GameObject picked = new GameObject();
         if (inventoryList.Count >= j+1) {
+            inventoryUI.removePreview();
             picked = inventoryList[j]; // take the onject out of the inventory
             handSlot.set(inventoryList[j]);
             inventoryList.RemoveAt(j);
