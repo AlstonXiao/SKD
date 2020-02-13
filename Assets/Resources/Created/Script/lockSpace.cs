@@ -29,7 +29,7 @@ public class lockSpace : MonoBehaviour {
     void Start () {
         GameObject[] obj = (GameObject[])Object.FindObjectsOfType(typeof(GameObject));
         for (int i = 0; i < obj.Length; i++){
-            if(obj[i].name == "Player body"){
+            if(obj[i].name == "Player"){
                 player = obj[i];
             }
         }
