@@ -65,6 +65,18 @@ public class inventory : MonoBehaviour
         }
     }
 
+    public void invAdd(GameObject obj)
+    {
+        inventoryUI.removePreview();
+        inventoryList.Add(obj);
+        handSlot.clear();
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+    }
+
     public void putIn(GameObject picked){
         Debug.Log("put in");
         if (inventoryList.Count >= capacity) // Check if full
@@ -74,9 +86,10 @@ public class inventory : MonoBehaviour
             return;
         }
 
-        inventoryUI.removePreview();
-        inventoryList.Add(picked); 
-        handSlot.clear();
+        //inventoryUI.removePreview();
+        //inventoryList.Add(picked); 
+        //handSlot.clear();
+        invAdd(picked);
 
         picked.SetActive(false);
         string temp_inventory = "";
@@ -90,10 +103,10 @@ public class inventory : MonoBehaviour
 
         picked = null; //set hand free
 
-        if (onItemChangedCallback != null)
-        {
-            onItemChangedCallback.Invoke();
-        }
+        //if (onItemChangedCallback != null)
+        //{
+        //    onItemChangedCallback.Invoke();
+        //}
     }
 
     public GameObject takeOut(int j){

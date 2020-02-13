@@ -34,7 +34,13 @@ public class InventorySlot : MonoBehaviour
     public void delete()
     {
         // deletes this item from inventory
+        if (identify(item).isGroup("pickUpAble"))
+        {
+            inventoryUI.removePreview();
+            //inventory.instance.GetComponent<pickUpObject>().drop();
+        }
         inventory.instance.delete(item);
+        clear();
     }
 
     public void add(GameObject newItem)
@@ -72,7 +78,13 @@ public class InventorySlot : MonoBehaviour
             inventoryUI.removePreview();
         } else
         {
-            inventory.instance.GetComponent<holdCuttedObject>().takeOut(inventory.instance.inventoryList.IndexOf(item)); // take out this item from inventory
+            int index = inventory.instance.inventoryList.IndexOf(item);
+            if (identify(item).isGroup("pickUpAble"))
+            {
+                inventory.instance.GetComponent<pickUpObject>().takeOut(index);
+            } else { 
+                inventory.instance.GetComponent<holdCuttedObject>().takeOut(index); // take out this item from inventory
+            }
         }
         inventoryUI.createPreview();
     }

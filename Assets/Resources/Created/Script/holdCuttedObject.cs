@@ -16,6 +16,7 @@ using static publicMethods.PublicMethods;
 public class holdCuttedObject : MonoBehaviour
 {
     HandSlot handSlot;
+    InventoryUI inventoryUI;
 
     public Camera           playerCamera;
     
@@ -61,6 +62,7 @@ public class holdCuttedObject : MonoBehaviour
     public static holdCuttedObject instance;
     
     void Start () {
+        inventoryUI = InventoryUI.instance;
         handSlot = HandSlot.instance;
         status_script = this.GetComponent<player_status>();
         inventory_script = this.GetComponent<inventory>();
@@ -81,27 +83,6 @@ public class holdCuttedObject : MonoBehaviour
         }
         instance = this;
     }
-
-    public void drop()
-    {
-        if (holdingObject.GetComponent<CuttedObject>().putAllowed())
-        {
-            while (status_script.Hands_free(Hands.cutted) != true) ;
-            holdingObject.GetComponent<Rigidbody>().detectCollisions = true;
-            if (holdingObject.GetComponent<CuttedObject>() != null)
-            {
-                holdingObject.GetComponent<CuttedObject>().startTracking();
-                holdingObject.GetComponent<CuttedObject>().notIstrigger();
-            }
-            holdingObject = null;
-            if (handSlot != null)
-            {
-                handSlot.clear();
-            }
-        }
-        fartherOrCloserFactor = 1;
-    }
-
 
     
     void Update () {
@@ -162,13 +143,14 @@ public class holdCuttedObject : MonoBehaviour
                     holdingObject.GetComponent<Rigidbody>().detectCollisions = true;
                     if (holdingObject.GetComponent<CuttedObject>() != null) {
                         holdingObject.GetComponent<CuttedObject>().startTracking();
-                        holdingObject.GetComponent<CuttedObject>().notIstrigger();
+                       holdingObject.GetComponent<CuttedObject>().notIstrigger();
                     }
                     holdingObject = null;
                     if (handSlot != null)
                     {
                         handSlot.clear();
-                    }                }
+                    }                
+                }
                 fartherOrCloserFactor = 1;
 
             }
@@ -192,6 +174,9 @@ public class holdCuttedObject : MonoBehaviour
     /// <param name="ori">The cutted object</param>
     public void putCuttedItemToHand(GameObject ori){
         ori.GetComponent<CuttedObject>().istrigger();
+        //
+        Debug.Log("hObject updated");
+        //
         holdingObject = ori;
 
         if (handSlot != null)

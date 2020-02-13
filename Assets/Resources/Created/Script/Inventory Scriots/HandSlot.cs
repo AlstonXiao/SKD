@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using static publicMethods.PublicMethods;
+
 /// <summary>
 /// <para>
 /// This class is for single hand slot
@@ -15,6 +17,8 @@ using UnityEngine.UI;
 public class HandSlot : MonoBehaviour
 {
     public static HandSlot instance; // Reference to itself
+    public GameObject player; // Reference to player for dropping
+    InventoryUI inventoryUI;
 
     private void Awake()
     {
@@ -24,6 +28,11 @@ public class HandSlot : MonoBehaviour
             return;
         }
         instance = this; // instantiates itself
+    }
+
+    private void Start()
+    {
+        inventoryUI = InventoryUI.instance;
     }
 
     public HandSlot()
@@ -40,7 +49,17 @@ public class HandSlot : MonoBehaviour
     public void delete()
     {
         //inventory.instance.delete(item); 
-        //pickUpObject.drop();
+        //holdCuttedObject.dropHand();
+        if (identify(item).isGroup("pickUpAble"))
+        {
+            inventoryUI.removePreview();
+            player.GetComponent<pickUpObject>().drop();
+        } else
+        {
+            Destroy(item);
+            player.GetComponent<player_status>().Hands_change(Hands.free);
+        }
+        clear();
     }
 
     public void set(GameObject newItem)

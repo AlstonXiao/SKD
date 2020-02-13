@@ -40,7 +40,6 @@ public class pickUpObject : MonoBehaviour {
     player_status           status_script;
 
     public float fartherOrCloserFactor = 1;
-      
 
     // Use this for initialization
     void Start () {
@@ -183,13 +182,16 @@ public class pickUpObject : MonoBehaviour {
                 if (!status_script.Hands_change(Hands.pickUpAble)){
                     print("error");
                 }
-                if (identify(rayHit.collider.gameObject).isGroup("pickUpAble")) {
+                if (identify(rayHit.collider.gameObject).isGroup("pickUpAble"))
+                {
                     picked = rayHit.collider.gameObject;
-                    while(picked.transform.parent != null && picked.transform.parent.gameObject!= null) {
-                        if (!identify(picked.transform.parent.gameObject).isGroup("pickUpAble")){
+                    while (picked.transform.parent != null && picked.transform.parent.gameObject != null)
+                    {
+                        if (!identify(picked.transform.parent.gameObject).isGroup("pickUpAble"))
+                        {
                             print("break on " + picked);
                             break;
-                            
+
                         }
                         picked = picked.transform.parent.gameObject;
                     }
@@ -199,16 +201,22 @@ public class pickUpObject : MonoBehaviour {
                     originalObjects.Enqueue(picked);
 
                     // disable the collider of all its children
-                    while (originalObjects.Count != 0) {
+                    while (originalObjects.Count != 0)
+                    {
                         GameObject currentParent = originalObjects.Dequeue();
                         // print(currentParent);
-                        foreach (Transform childs in currentParent.transform) {
+                        foreach (Transform childs in currentParent.transform)
+                        {
                             GameObject resultChilds = childs.gameObject;
-                            originalObjects.Enqueue(childs.gameObject);    
+                            originalObjects.Enqueue(childs.gameObject);
                         }
-                        foreach(Collider c in currentParent.GetComponents<Collider> ()) {
+                        foreach (Collider c in currentParent.GetComponents<Collider>())
+                        {
                             c.enabled = false;
-                        }   
+                        }
+                    }
+                    if (picked != null) {
+                        HandSlot.instance.set(picked);
                     }
                 }
 
