@@ -16,6 +16,7 @@ using static publicMethods.PublicMethods;
 /// </summary>
 public class pickUpObject : MonoBehaviour {
 
+    public GameObject canvas;
     public Camera           playerCamera;
     public float            rayRange; // the maximum distance of the object that can be picked
     public float            spawnDistance;// distance the object is in front of camera, const to each object
@@ -49,7 +50,7 @@ public class pickUpObject : MonoBehaviour {
 	
 
     public void takeOut(int num){
-        if(!status_script.Hands_avaliable()){
+        if(!status_script.Hands_available()){
             return;
         }
         GameObject ret = this.GetComponent<inventory>().takeOut(num);
@@ -156,7 +157,9 @@ public class pickUpObject : MonoBehaviour {
                     print("error");
                 }
                 picked = null;
-                
+                Debug.Log("removing");
+                canvas.GetComponent<InventoryUI>().removePreview();
+                canvas.GetComponent<InventoryUI>().clearHandSlot();
             }
             if (Input.GetKeyDown(allKeys.putInInventory))
             {
@@ -174,7 +177,7 @@ public class pickUpObject : MonoBehaviour {
         }
 
         //pick up an pickupable object if hands are free
-        if (status_script.Hands_avaliable()&& Input.GetKeyDown(allKeys.pickUp)) {
+        if (status_script.Hands_available()&& Input.GetKeyDown(allKeys.pickUp)) {
             
             Ray rayCast = playerCamera.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             RaycastHit rayHit;

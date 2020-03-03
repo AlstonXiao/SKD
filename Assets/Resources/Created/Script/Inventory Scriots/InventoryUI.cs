@@ -90,6 +90,11 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void clearHandSlot()
+    {
+        handSlot.clear();
+    }
+
     public void createPreview()
     {
         if (handSlot.getItem() != null)

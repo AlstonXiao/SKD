@@ -1,83 +1,11 @@
 fileFormatVersion: 2
-guid: 9861bcff254668847a9935b668ec67c4
+guid: 51cf5481d5aebdc44af5fee09361cfd7
 ModelImporter:
-  serializedVersion: 19300
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: //RootNode
-  - first:
-      1: 100002
-    second: Cube
-  - first:
-      1: 100004
-    second: Cube_001
-  - first:
-      4: 400000
-    second: //RootNode
-  - first:
-      4: 400002
-    second: Cube
-  - first:
-      4: 400004
-    second: Cube_001
-  - first:
-      21: 2100000
-    second: Material
-  - first:
-      21: 2100002
-    second: unnamed
-  - first:
-      23: 2300000
-    second: //RootNode
-  - first:
-      23: 2300002
-    second: Cube
-  - first:
-      23: 2300004
-    second: Cube_001
-  - first:
-      33: 3300000
-    second: //RootNode
-  - first:
-      33: 3300002
-    second: Cube
-  - first:
-      33: 3300004
-    second: Cube_001
-  - first:
-      43: 4300000
-    second: Cube
-  - first:
-      43: 4300002
-    second: Cube_001
-  - first:
-      64: 6400000
-    second: //RootNode
-  - first:
-      64: 6400002
-    second: Cube
-  - first:
-      64: 6400004
-    second: Cube_001
-  - first:
-      74: 7400000
-    second: Default Take
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      41386430: 2186277476908879412
-    second: ImportLogs
-  - first:
-      74: -4064532029014869935
-    second: Cube.001|Cube.001Action.001
-  - first:
-      74: -623603649343465320
-    second: Scene
+  serializedVersion: 26
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -103,18 +31,18 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -141,6 +69,7 @@ ModelImporter:
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -152,16 +81,14 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 10
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
-  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

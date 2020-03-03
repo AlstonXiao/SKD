@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using static Sprites;
 using static publicMethods.PublicMethods;
 
 /// <summary>
@@ -18,7 +19,9 @@ public class HandSlot : MonoBehaviour
 {
     public static HandSlot instance; // Reference to itself
     public GameObject player; // Reference to player for dropping
+    public TMPro.TextMeshProUGUI name;
     InventoryUI inventoryUI;
+
 
     private void Awake()
     {
@@ -52,22 +55,32 @@ public class HandSlot : MonoBehaviour
         //holdCuttedObject.dropHand();
         if (identify(item).isGroup("pickUpAble"))
         {
-            inventoryUI.removePreview();
             player.GetComponent<pickUpObject>().drop();
         } else
         {
             Destroy(item);
-            player.GetComponent<player_status>().Hands_change(Hands.free);
+            player.GetComponent<player_status>().Hands_free(Hands.cutted);
+            player.GetComponent<holdCuttedObject>().deleteCutted();
+            //player.GetComponent<placeGem>().deleteCutted();
         }
+        inventoryUI.removePreview();
         clear();
     }
 
     public void set(GameObject newItem)
     {
+
         Debug.Log("Set hand");
         item = newItem;
-
-        icon.sprite = null;
+        if (identify(item).isGroup("pickUpAble"))
+        {
+            name.text = "pickedUp_1";
+            icon.sprite = Sprites.getSprite(1);
+        } else
+        {
+            name.text = "cutted_1";
+            icon.sprite = Sprites.getSprite(0);
+        }
         // Assign to a sprite
         icon.enabled = true;
         removeButton.SetActive(true);
@@ -80,6 +93,7 @@ public class HandSlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
+        name.text = "Empty";
         removeButton.SetActive(false);
     }
 

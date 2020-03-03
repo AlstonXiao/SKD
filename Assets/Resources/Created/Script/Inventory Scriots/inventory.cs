@@ -86,27 +86,19 @@ public class inventory : MonoBehaviour
             return;
         }
 
-        //inventoryUI.removePreview();
-        //inventoryList.Add(picked); 
-        //handSlot.clear();
         invAdd(picked);
 
         picked.SetActive(false);
-        string temp_inventory = "";
+        //string temp_inventory = "";
         // generate the text below the screen
-        for (int i = 0; i < inventoryList.Count; i++)
-        {
-            //display information of each item in the inventory
-            temp_inventory = temp_inventory + (i + 1) + ", " + identify(inventoryList[i]).getName() + " ";
-        }
-        inventoryText.text = temp_inventory;
+        //for (int i = 0; i < inventoryList.Count; i++)
+        //{
+        //    //display information of each item in the inventory
+        //    temp_inventory = temp_inventory + (i + 1) + ", " + identify(inventoryList[i]).getName() + " ";
+        //}
+        //inventoryText.text = temp_inventory;
 
         picked = null; //set hand free
-
-        //if (onItemChangedCallback != null)
-        //{
-        //    onItemChangedCallback.Invoke();
-        //}
     }
 
     public GameObject takeOut(int j){
@@ -120,11 +112,11 @@ public class inventory : MonoBehaviour
 
             picked.SetActive(true);
 
-            string temp_inventory = "";
-            for (int i = 0; i < inventoryList.Count; i++) {
-                temp_inventory = temp_inventory + (i + 1) + ", " + identify(inventoryList[i]).getName() + " ";
-            }
-            inventoryText.text = temp_inventory;
+            //string temp_inventory = "";
+            //for (int i = 0; i < inventoryList.Count; i++) {
+            //    temp_inventory = temp_inventory + (i + 1) + ", " + identify(inventoryList[i]).getName() + " ";
+            //}
+            //inventoryText.text = temp_inventory;
 
             if (onItemChangedCallback != null)
             {

@@ -32,7 +32,7 @@ public class player_status : MonoBehaviour {
     /// This method is used to check if the user's hands is available to interact with other things
     /// </summary>
     /// <returns></returns>
-    public bool Hands_avaliable() {
+    public bool Hands_available() {
         return (PlayerHands == Hands.free);
     }
 

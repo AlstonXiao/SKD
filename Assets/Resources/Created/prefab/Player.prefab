@@ -13,6 +13,13 @@ GameObject:
   - component: {fileID: 11400000}
   - component: {fileID: 5400000}
   - component: {fileID: 8200000}
+  - component: {fileID: 1188798417}
+  - component: {fileID: 1188798418}
+  - component: {fileID: 1188798419}
+  - component: {fileID: 1188798420}
+  - component: {fileID: 1188798421}
+  - component: {fileID: 1188798423}
+  - component: {fileID: 30785219261803399}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -361,6 +368,148 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1188798417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad38b0d2daff94cf7b275f56e54f3f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 2000000}
+  allKeys:
+    putDown: 101
+    putInInventory: 0
+    changeMode: 99
+    rotationF: 118
+    rotationB: 98
+    resetKey: 0
+  defaultSpawnDistance: 20
+  fartherSpeed: 40
+  rotationSpeed: 40
+  minHoldingDistance: 0.5
+  maxHoldingDistance: 3
+  spawnDistance: 0
+  holdingObject: {fileID: 0}
+  havePicked: 0
+  fartherOrCloserFactor: 1
+  rotationMode: 0
+  status_script: {fileID: 0}
+--- !u!114 &1188798418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4614ce0cb78eee4288cf136c5dc14e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  playerCamera: {fileID: 2000000}
+  rayRange: 0
+  spawnDistance: 0
+  allKeys:
+    pickUp: 0
+    putDown: 0
+    putInInventory: 114
+  picked: {fileID: 0}
+  fartherOrCloserFactor: 1
+--- !u!114 &1188798419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d146a3d9b5b2b87419826a942c51a5e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHands: 0
+  lowest_position: 10
+--- !u!114 &1188798420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b4fd9ac6f00184e8626854abba8446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GemPrefab: {fileID: 1037895204229902, guid: c16d322fc2222f44aa0e455139792d97, type: 3}
+  playerCamera: {fileID: 2000000}
+  allKeys:
+    placeGemKey: 113
+    putGemKey: 323
+    cancelKey: 113
+    largerKey: 122
+    smallerKey: 120
+  spawnDistance: 10
+  maxGem: 5
+  scaleSpeed: 15
+  fartherSpeed: 30
+  minimunDistance: 0.2
+  maximum_scale: 0
+  temp: {fileID: 0}
+  createdGem: []
+  fartherOrCloserFactor: 1
+  rotationYOffest: 0
+--- !u!114 &1188798421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371e455ff756a1e419c3660441d5516a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushPower: 10
+--- !u!114 &1188798423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2c4fbdf1eff4246994c70e56232159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  group: []
+  initRegeditName: []
+  initRegeditData: []
+--- !u!114 &30785219261803399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca42de3512f44a26972ac816a27a7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
+  handSlot: {fileID: 0}
+  capacity: 9
+  inventoryField: {fileID: 0}
+  inventoryList: []
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

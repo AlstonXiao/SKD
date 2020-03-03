@@ -168,6 +168,12 @@ public class holdCuttedObject : MonoBehaviour
 
 	}
 
+    public void deleteCutted()
+    {
+        holdingObject = null;
+        fartherOrCloserFactor = 1;
+    }
+
     /// <summary>
     /// This method is called when we want to put a cutted object on the player's hand
     /// </summary>
@@ -203,7 +209,7 @@ public class holdCuttedObject : MonoBehaviour
     /// <param name="num">The position of that object</param>
     public void takeOut(int num)
     {
-        if (!status_script.Hands_avaliable()) {
+        if (!status_script.Hands_available()) {
             return;
         }
         GameObject ret = this.GetComponent<inventory>().takeOut(num);
@@ -221,7 +227,7 @@ public class holdCuttedObject : MonoBehaviour
     /// <returns>the absolute position of the gem in space</returns>
     private Vector3 CalculatePosition()
     {
-        Vector3 playerPos = this.transform.position + new Vector3(0, 4, 0);
+        Vector3 playerPos = this.transform.position; //+ new Vector3(0, 4, 0);
         Vector3 playerDirection = playerCamera.transform.forward;
         Vector3 spawnPos = playerPos + playerDirection * spawnDistance * fartherOrCloserFactor;
         return spawnPos;

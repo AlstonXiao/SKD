@@ -101,7 +101,7 @@ public class placeGem : MonoBehaviour
     {
         Vector3 playerPos = this.transform.position + new Vector3(0, 4, 0); //Approximate position of player's eyes
         Vector3 playerDirection = playerCamera.transform.forward;
-        Vector3 spawnPos = playerPos - new Vector3(0, 3, 0) + playerDirection * spawnDistance * fartherOrCloserFactor; //The position of gem
+        Vector3 spawnPos = playerPos - new Vector3(0, 4, 0) + playerDirection * spawnDistance * fartherOrCloserFactor; //The position of gem
         return spawnPos;
     }
 
