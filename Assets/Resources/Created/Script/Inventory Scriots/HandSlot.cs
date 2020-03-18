@@ -11,21 +11,24 @@ using static publicMethods.PublicMethods;
 /// This class is for single hand slot
 /// </para>
 /// Updated: 1/3/2020<para/>
-/// Author: Roland Jiang<para/>
-/// Attached object: player<para/>
-/// Updates: <para/>
+/// Author: Roland Jiang, Yan Xiao<para/>
+/// Attached object: handSlotUI<para/>
+/// Updates: 3/17/2020: moved some functionality to other scripts<para/>
 /// </summary>
 public class HandSlot : MonoBehaviour
 {
     public static HandSlot instance; // Reference to itself
     public GameObject player; // Reference to player for dropping
-    public TMPro.TextMeshProUGUI name;
-    InventoryUI inventoryUI;
 
+    public TMPro.TextMeshProUGUI displayName;
+    public Image icon; // icon of item
+    public GameObject removeButton; // button for deleting
+
+    private GameObject item; // item in hand slot
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null) 
         {
             Debug.LogWarning("More than one instance of handslot");
             return;
@@ -35,50 +38,39 @@ public class HandSlot : MonoBehaviour
 
     private void Start()
     {
-        inventoryUI = InventoryUI.instance;
+        displayName.SetText("");
     }
 
-    public HandSlot()
-    {
-        // Otherwise handslot will be null
-        instance = this;
-    }
-
-    GameObject item; // item in hand slot
-
-    public Image icon; // icon of item
-    public GameObject removeButton; // button for deleting
-
+    /// <summary>
+    /// This is called when the x is pressed, will drop item on the hand
+    /// </summary>
     public void delete()
     {
-        //inventory.instance.delete(item); 
-        //holdCuttedObject.dropHand();
         if (identify(item).isGroup("pickUpAble"))
         {
-            player.GetComponent<pickUpObject>().drop();
-        } else
+            player.GetComponent<pickUpObject>().DropItem(item);
+        } else if (identify(item).isGroup("cutted"))
         {
-            Destroy(item);
-            player.GetComponent<player_status>().Hands_free(Hands.cutted);
-            player.GetComponent<holdCuttedObject>().deleteCutted();
-            //player.GetComponent<placeGem>().deleteCutted();
+            player.GetComponent<holdCuttedObject>().deleteCuttedObject(item);
         }
-        inventoryUI.removePreview();
-        clear();
     }
 
-    public void set(GameObject newItem)
+    /// <summary>
+    /// This will be called when UI provides information to the Handslot
+    /// </summary>
+    /// <param name="newItem">The target item</param>
+    public void Set(GameObject newItem)
     {
 
-        Debug.Log("Set hand");
+        // Debug.Log("Set hand slot");
         item = newItem;
         if (identify(item).isGroup("pickUpAble"))
         {
-            name.text = "pickedUp_1";
+            displayName.text = newItem.name;
             icon.sprite = Sprites.getSprite(1);
         } else
         {
-            name.text = "cutted_1";
+            displayName.text = newItem.name;
             icon.sprite = Sprites.getSprite(0);
         }
         // Assign to a sprite
@@ -87,15 +79,20 @@ public class HandSlot : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// This will clear all the information on the screen, will only be called when new information
+    /// about the hand is avaliable. 
+    /// </summary>
     public void clear()
     {
         // Clear all
         item = null;
         icon.sprite = null;
         icon.enabled = false;
-        name.text = "Empty";
+        displayName.text = "";
         removeButton.SetActive(false);
     }
+
 
     public GameObject getItem()
     {
@@ -105,5 +102,23 @@ public class HandSlot : MonoBehaviour
     public bool isEmpty()
     {
         return (item == null);
+    }
+
+    /// <summary>
+    /// This will be called when handslot is pressed
+    /// it just put the item into inventory
+    /// </summary>
+    public void PutInInventory()
+    {
+        if (item == null)
+            return;
+        if (identify(item).isGroup("pickUpAble"))
+        {
+            player.GetComponent<pickUpObject>().PutInInventory();
+        }
+        else if (identify(item).isGroup("cutted"))
+        {
+            player.GetComponent<holdCuttedObject>().PutInInventory();
+        }
     }
 }

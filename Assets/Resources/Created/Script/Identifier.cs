@@ -9,7 +9,7 @@ using UnityEngine;
 /// This class is used to identify objects using "Groups"
 /// </para>
 /// <para>
-/// Existing Regedit: pickUpScale
+/// Existing Regedit: pickUpScale, originalParent: original parent object while pickup, cuttedSpawnDistance.
 /// </para>
 /// Updated: 3/15/2019<para/>
 /// Author: Yan Xiao<para/>
@@ -26,7 +26,7 @@ public class Identifier : MonoBehaviour {
 
 	void Start()
     {
-        group.Add("default");
+        // group.Add("default");
         for (int i = 0; i < initRegeditData.Count; i++) {
             regedit.Add(initRegeditName[i], initRegeditData[i]);
         }
@@ -136,7 +136,7 @@ public class Identifier : MonoBehaviour {
         group = new List<string>();
         regedit = new Dictionary<string, object>();
         for (int i = 0; i < origin.getAllGroup().Count; i++) {
-            if (origin.getAllGroup()[i] != "default") group.Add(origin.getAllGroup()[i]);
+            group.Add(origin.getAllGroup()[i]);
         }
         regedit = new Dictionary<string, object>(origin.getRegedit());
     }

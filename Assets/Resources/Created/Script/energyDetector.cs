@@ -7,9 +7,10 @@ using static publicMethods.PublicMethods;
 /// <para>
 /// This class is used to calculate the energy strenghth and guide the player to the areas where he can explore
 /// </para>
-/// Author: Yuzhe Gu<para/>
+/// Author: Yuzhe Gu, Yan Xiao<para/>
 /// Attached object: Player<para/>
 /// Needed object: Several gameObjects to calculate the strenght<para/>
+/// Update: Find the object in the scene using name 20/3/4
 /// </summary>
 public class energyDetector : MonoBehaviour
 {
@@ -36,9 +37,6 @@ public class energyDetector : MonoBehaviour
             float num = Vector3.Distance(this.transform.position, item.transform.position);
             energyLevel += 100/Mathf.Sqrt(num);
         }
-        // if(energyLevel >= 1.0f){
-        //     energyLevel = 1.0f;
-        // }
 
         // rounding 
         int temp = (int)energyLevel;

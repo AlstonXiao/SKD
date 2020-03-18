@@ -60,13 +60,13 @@ public class placeGem : MonoBehaviour
         if (temp != null) {
             minimunDistance = Mathf.Max(0.2f, temp.transform.localScale.x / 5 / 3);
             AdjustPosition(temp);
-            if (Input.GetKeyDown(allKeys.cancelKey)) {
+            if (Input.GetKeyDown(allKeys.cancelKey) && status_script.Scree_free()) {
                 Destroy(temp);
                 temp = null;
                 while (status_script.Hands_free(Hands.gem) == false);
                 rotationYOffest = 0;
                 fartherOrCloserFactor = 1;
-            } else if (Input.GetKeyDown(allKeys.putGemKey)) {
+            } else if (Input.GetKeyDown(allKeys.putGemKey) && status_script.Scree_free()) {
                 while (status_script.Hands_free(Hands.gem) == false);
                 int status = gem_status.Unpick();
                 if (status == 0) {
@@ -84,7 +84,7 @@ public class placeGem : MonoBehaviour
 
         // This part of code detects if user can put a gem and initiate the gem if
         // user pressed the place gem key
-        else if (Input.GetKeyDown(allKeys.placeGemKey) && createdGem.Count < maxGem) {
+        else if (Input.GetKeyDown(allKeys.placeGemKey) && createdGem.Count < maxGem && status_script.Scree_free()) {
             if (status_script.Hands_change(Hands.gem)){
                 temp = Instantiate(GemPrefab);
                 gem_status = temp.GetComponent<lockSpace>();

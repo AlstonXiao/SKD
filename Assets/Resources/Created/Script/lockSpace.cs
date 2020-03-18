@@ -157,11 +157,12 @@ public class lockSpace : MonoBehaviour {
 
         }
         else {
-            while (finding_parent.transform.parent != null &&  identify(finding_parent.transform.parent.gameObject).isGroup("cutted"))
+            while (finding_parent.transform.parent != null && identify(finding_parent.transform.parent.gameObject) != null && identify(finding_parent.transform.parent.gameObject).isGroup("cutted"))
             {
                 finding_parent = finding_parent.transform.parent.gameObject;
             }
             Destroy(finding_parent);
+            hold_script.DestoriedDuplicatedObjectFromScene();
             return 1;
         }
     }

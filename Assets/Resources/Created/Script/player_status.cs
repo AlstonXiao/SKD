@@ -7,24 +7,23 @@ using static publicMethods.PublicMethods;
 /// <para>
 /// This class is used to identify the status of player
 /// </para>
-/// enum Available: {free, pickUpAble, cutted, gem} <para/>
+/// Hands enum Available: {free, pickUpAble, cutted, gem} <para/>
+/// Screen enum Available: {free, inventory} <para/>
+/// Updated: 3/17/2020. Add the status of the screen <para/>
 /// Updated: 12/25/2019. Add more comment and change it to a enum controlled system<para/>
 /// Updated: 2/4/2019. Added some comment<para/>
 /// Author: Yan Xiao<para/>
 /// Attached object: player<para/>
 /// </summary>
 public class player_status : MonoBehaviour {
-    public Hands    PlayerHands;
-    public int      lowest_position;
-    pickUpObject    pick_script;
-    placeGem        place_script;
-    Vector3         initial_position;
+    public Hands            PlayerHands;
+    public ScreenLockStatus screenStatus;
+    public int              lowest_position;
+    Vector3                 initial_position;
     
     
 	// Use this for initialization
 	void Start () {
-        pick_script = this.GetComponent<pickUpObject>();
-        place_script = this.GetComponent<placeGem>();
         initial_position = transform.position;
 	}
 	
@@ -54,7 +53,15 @@ public class player_status : MonoBehaviour {
         PlayerHands = newstatus;
         return true; 
     }
-
+    
+    /// <summary>
+    /// To see if the player can swap items from inventory. 
+    /// </summary>
+    /// <returns>True if the hand is free, or holding things that can be put in inventory</returns>
+    public bool Hands_swap_able()
+    {
+        return PlayerHands == Hands.free || PlayerHands == Hands.pickUpAble || PlayerHands == Hands.cutted;
+    }
     /// <summary>
     /// Free the hand from the previous status. Only free when the type match. True when succeed, false when the current status don't match
     /// </summary>
@@ -64,5 +71,38 @@ public class player_status : MonoBehaviour {
         if (PlayerHands != currentStatus) return false;
         PlayerHands = Hands.free;
         return true; 
+    }
+
+    /// <summary>
+    /// Check if the screen is free to move around 
+    /// </summary>
+    /// <returns>return true if screen is free</returns>
+    public bool Scree_free()
+    {
+        return screenStatus == ScreenLockStatus.free;
+    }
+
+    /// <summary>
+    /// Lock the screen to a state. So some actions are limited
+    /// </summary>
+    /// <param name="newstatus">new status we want to change the screen</param>
+    /// <returns>True if success, false otherwise</returns>
+    public bool Screen_lock(ScreenLockStatus newstatus)
+    {
+        if (screenStatus != ScreenLockStatus.free) return false;
+        screenStatus = newstatus;
+        return true;
+    }
+
+    /// <summary>
+    /// Unlock the screen to "free" status and player can move around
+    /// </summary>
+    /// <param name="currentStatus">The status you want to unlock screen from</param>
+    /// <returns>true if success</returns>
+    public bool Screen_unloock(ScreenLockStatus currentStatus)
+    {
+        if (screenStatus != currentStatus) return false;
+        screenStatus = ScreenLockStatus.free;
+        return true;
     }
 }

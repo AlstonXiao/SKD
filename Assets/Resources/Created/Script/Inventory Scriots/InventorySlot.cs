@@ -10,20 +10,18 @@ using static publicMethods.PublicMethods;
 /// This class is for individual inventory slots used by other classes
 /// </para>
 /// Updated: 1/3/2020<para/>
-/// Author: Roland Jiang<para/>
+/// Author: Roland Jiang, Yan Xiao<para/>
 /// Attached object: inventory<para/>
 /// Updates: <para/>
 /// </summary>
 public class InventorySlot : MonoBehaviour
 {
-    GameObject item; // item in this slot
+    private GameObject item; // item in this slot
+    private InventoryUI inventoryUI; // Reference to inventoryUI
 
-    public InventoryUI inventoryUI; // Reference to inventoryUI
     public Image icon; // icon of this item (not used yet)
     public GameObject removeButton; // remove button for deleting
-    public TMPro.TextMeshProUGUI name;
-    HandSlot handSlot; // Reference to slot
-    //public holdCuttedObject holdCuttedObject; // Reference to holdCuttedObject
+    public TMPro.TextMeshProUGUI displayName;
 
     public GameObject player; 
 
@@ -31,52 +29,42 @@ public class InventorySlot : MonoBehaviour
     {
         // Instantiates
         inventoryUI = InventoryUI.instance;
-        handSlot = HandSlot.instance;
-        //holdCuttedObject = holdCuttedObject.instance;
+        displayName.SetText("");
     }
 
+    /// <summary>
+    /// This is called when the x is pressed, will drop item 
+    /// </summary>
     public void delete()
     {
-        // deletes this item from inventory
         if (identify(item).isGroup("pickUpAble"))
         {
-            bool emptyHandSlot = handSlot.isEmpty();
-            selectItem();
-
-            //player.GetComponent<pickUpObject>().takeOut(player.GetComponent<inventory>().inventoryList.IndexOf(item));
-            handSlot.delete();
-
-            if (!emptyHandSlot)
-            {
-                int newIndex = player.GetComponent<inventory>().inventoryList.Count - 1;
-                if (identify(player.GetComponent<inventory>().inventoryList[newIndex]).isGroup("pickUpAble"))
-                {
-                    player.GetComponent<pickUpObject>().takeOut(newIndex);
-                }
-                else
-                {
-                    player.GetComponent<holdCuttedObject>().takeOut(newIndex); // take out this item from inventory
-                }
-            }
-
-        } else
-        {
-            inventory.instance.delete(item);
+            player.GetComponent<pickUpObject>().DropItem(item);
         }
-        clear();
+        else if (identify(item).isGroup("cutted"))
+        {
+            player.GetComponent<holdCuttedObject>().deleteCuttedObject(item);
+        }
+        // this will updata UI automatically
+        inventory.instance.delete(item);
+    
     }
 
-    public void add(GameObject newItem)
+    /// <summary>
+    /// This will be called when UI provides information to the InventorySlot
+    /// </summary>
+    /// <param name="newItem">The target item</param>
+    public void Set(GameObject newItem)
     {
         item = newItem; // set item
         if (identify(item).isGroup("pickUpAble"))
         {
-            name.text = "pickedUp_1";
+            displayName.text = newItem.name;
             icon.sprite = Sprites.getSprite(1);
         }
         else
         {
-            name.text = "cutted_1";
+            displayName.text = newItem.name;
             icon.sprite = Sprites.getSprite(0);
         }
         // Assign to a sprite
@@ -85,49 +73,27 @@ public class InventorySlot : MonoBehaviour
         //removeButton.interactable = true;
     }
 
+    /// <summary>
+    /// This will empty the slot
+    /// </summary>
     public void clear()
     {
         // clears item, sprite, remove button, etc
         item = null;
         icon.sprite = null;
         icon.enabled = false;
-        name.text = "Empty";
+        displayName.text = "";
         removeButton.SetActive(false);
     }
 
+    /// <summary>
+    /// This will be called by the button press. Will swap item with handslot if possible
+    /// </summary>
     public void selectItem()
     {
-        if (!handSlot.isEmpty()) // if item is in hand already
+        if (item != null)
         {
-            Debug.Log("Swapping objects");
-            //inventory.instance.putIn(handSlot.getItem());
-            if (identify(handSlot.getItem()).isGroup("pickUpAble"))
-            {
-                Debug.Log("Putting in pickupable");
-                player.GetComponent<inventory>().putIn(handSlot.getItem());
-                player.GetComponent<player_status>().Hands_free(Hands.pickUpAble);
-            }
-            else
-            {
-                Debug.Log("Putting in cutted");
-                player.GetComponent<inventory>().putIn(handSlot.getItem());
-                player.GetComponent<player_status>().Hands_free(Hands.cutted);
-                player.GetComponent<holdCuttedObject>().holdingObject = null;
-                player.GetComponent<holdCuttedObject>().fartherOrCloserFactor = 1;
-            }
-            inventoryUI.removePreview();
+            inventoryUI.swapFromInventorySlot(item);
         }
-        Debug.Log("taking out");
-        Debug.Log("Hands free? " + player.GetComponent<player_status>().Hands_available());
-        int index = player.GetComponent<inventory>().inventoryList.IndexOf(item);
-        if (identify(item).isGroup("pickUpAble"))
-        {
-            player.GetComponent<pickUpObject>().takeOut(index);
-        }
-        else
-        {
-            player.GetComponent<holdCuttedObject>().takeOut(index); // take out this item from 
-        }
-        inventoryUI.createPreview();
     }
 }

@@ -13,10 +13,11 @@ Number key: Get things from inventory
 ----------------------------------------
 RegidedValue:
 
-pickUpScale: default 1
-pickUpDistance: default 20
-minimumDistance: default 0.5
-maximumDistance: default  1.5
+pickUpScale: default 0.5
+minimumDistance: default 0.5 
+maximumDistance: default  1.5 
+cuttedSpawnDistance: default 6
+originalParent: no default value, original parent object while pickup
 
 ----------------------------------------
 Groups:
@@ -57,6 +58,8 @@ CuttedObject: works with the HoldCuttedObject. This script is on that object.
 ----------------------------------------
 Player Status:
 Hands: switch between several status defined by the enum
+Screen: Indicates the screen status. If the screen is occupied by some other things (For example: inventory UI), certain number of 
+actions will be blocked (For example: rotate camera)
 
 ----------------------------------------
 Inventory system: works with HoldCuttedObject and pickup object

@@ -1,0 +1,28 @@
+Inventory structure
+
+Inventory.cs / PickUpObject.cs / hold cutted object -> information and instruction -> inventoryUI.cs
+InventoryUI.cs -> information -> handSlotcs / inventorySlot.cs
+handSlot.cs / inventorySlot.cs -> player instruction -> Inventory.cs / PickUpObject.cs / hold cutted object
+
+-----------------------------------
+When inventory UI key is pressed, inventoryUI will respond to it and show the UI. Also it will disable all other input from the player
+When player click delete on the UI, Handslot / inventory slot will issue a command to pickupobject.cs or holdCuttedObject.cs to delete that object
+When player click to swap items, inventory slot will issue a command to inventoryUI and it will issue command to other script to perform the swap.
+
+-----------------------------------
+PickupObject, holdCuttedObject, inventory will only provide information to inventoryUI, it will not do other things. 
+They will only call three methods: updateUI(), addToHandSlot(GameObject item), remove from handslot.
+
+InventoryUI, inventoryslot, handslot will only issue commands to pickUpObject, holdCuttedObject, inventory.
+For example, PutInInventory(). delete(). 
+They will not update the information in UI because pickUpObject, holdCuttedObject, inventory will update the information
+-----------------------------------
+
+Inventory:
+-Store and manage the items, will call update UI if anything changes. 
+
+InventoryUI:
+-manage the visibility of the UI and preview, move data from inventory / hands to each slot, Will help to swap items
+
+InventorySlot/HandSlot:
+-Do minimum amount of things, will react to the user input, will update the information it stores when needed

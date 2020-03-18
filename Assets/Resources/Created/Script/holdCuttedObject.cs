@@ -42,37 +42,44 @@ public class holdCuttedObject : MonoBehaviour
 
     [Space(10)]
     public float defaultSpawnDistance = 20; // default distance, can be overide in the regidit
+    public float defaultMinHoldingDistance = 0.5f; // relative scale
+    public float defaultMaxHoldingDistance = 2f;
     public float fartherSpeed;
     public float rotationSpeed;
-
-    public float minHoldingDistance = 0.5f; // relative scale
-    public float maxHoldingDistance = 2f;
-
+    public DuplicatedObjectPlacingType limitationType;
+    public int duplicatedLimitation;
 
     [Header("Debug")]
+    public float            minHoldingDistance; // relative scale
+    public float            maxHoldingDistance;
     public float            spawnDistance;// distance the object is in front of camera
     public GameObject       holdingObject = null;
     public bool             havePicked = false;
     public float            fartherOrCloserFactor = 1;
     public int              rotationMode; // 0 up and down, 1 left and right
+    public int              itemPlaced;
+    public int              itemExist;
 
-    public player_status           status_script;
-    inventory               inventory_script;
+    private player_status   status_script;
+    private inventory       inventory_script;
 
     public static holdCuttedObject instance;
-    
+
+    public enum DuplicatedObjectPlacingType {None, itemPlaced, itemExist };
+
     void Start () {
         inventoryUI = InventoryUI.instance;
         handSlot = HandSlot.instance;
         status_script = this.GetComponent<player_status>();
         inventory_script = this.GetComponent<inventory>();
-        // spawnDistance = 0;
         fartherOrCloserFactor = 1.0f;
+        itemPlaced = 0;
+        itemExist = 0;
 	}
 
     
     /// <summary>
-    /// TODO
+    /// Single Hold Cutted Object instance in the game
     /// </summary>
     private void Awake()
     {
@@ -88,90 +95,81 @@ public class holdCuttedObject : MonoBehaviour
     void Update () {
 
         // This part of code is used to track if user currently is holding a object in his hands
-        if (holdingObject != null){   
-            holdingObject.transform.position = CalculatePosition();
+        if (holdingObject == null)
+            return;
+        holdingObject.transform.position = CalculatePosition();
 
-            // Rotation of the object 
-            // switch rotation mode
-            if (Input.GetKeyDown(allKeys.changeMode)){
-                if(rotationMode == 1){
-                    rotationMode = 0;
-                }
-                else{
-                    rotationMode += 1;
-                } 
-            }
+        // if the screen is busy, then we do not allow any other instructions
+        if (!status_script.Scree_free())
+            return;
 
-            if(Input.GetKey(allKeys.rotationF)){
-                if(rotationMode == 0){
-                    holdingObject.transform.Rotate(new Vector3(1, 0, 0) * rotationSpeed * Time.deltaTime, Space.World);
-                }
-                else if(rotationMode == 1){
-                    holdingObject.transform.Rotate(new Vector3(0, 1, 0) * rotationSpeed * Time.deltaTime, Space.World);
-                }
-                
-            }
+        // Rotation of the object 
+        // switch rotation mode
+        // if rotation mode == 0, rotate the X axis, if rotation mode == 1, rotate the y axis
+        if (Input.GetKeyDown(allKeys.changeMode))
+            rotationMode = (rotationMode + 1) % 2;
 
-            if(Input.GetKey(allKeys.rotationB)){
-                if(rotationMode == 0){
+        if (Input.GetKey(allKeys.rotationF))
+            holdingObject.transform.Rotate(new Vector3((1 - rotationMode), rotationMode, 0) * rotationSpeed * Time.deltaTime, Space.World);
 
-                    holdingObject.transform.Rotate(new Vector3(1, 0, 0) * rotationSpeed * Time.deltaTime * -1, Space.World);
-                }
-                else if(rotationMode == 1){
-                    holdingObject.transform.Rotate(new Vector3(0, 1, 0) * rotationSpeed * Time.deltaTime * -1, Space.World);
-                }
-            }
+        if (Input.GetKey(allKeys.rotationB))
+            holdingObject.transform.Rotate(new Vector3((1 - rotationMode), rotationMode, 0) * rotationSpeed * Time.deltaTime * -1, Space.World);
 
-            // scale of the object
-            if (Input.GetAxis("Mouse ScrollWheel") != 0) {
-                fartherOrCloserFactor = fartherOrCloserFactor + fartherSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
-                // saturated the scale
-                if (fartherOrCloserFactor < minHoldingDistance)
+        // scale of the object
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            fartherOrCloserFactor = fartherOrCloserFactor + fartherSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
+            // saturated the scale
+            fartherOrCloserFactor = Mathf.Min(fartherOrCloserFactor, maxHoldingDistance);
+            fartherOrCloserFactor = Mathf.Max(fartherOrCloserFactor, minHoldingDistance);
+        }
+
+        // if user want to put down the object 
+        if (Input.GetKeyDown(allKeys.putDown))
+        {
+            if (holdingObject.GetComponent<CuttedObject>().putAllowed() && PutDuplicatedObjectAllowed())
+            {
+                if (status_script.Hands_free(Hands.cutted) != true)
+                    Debug.LogError("Cannot Free Hands while dropping cutted objects");
+
+                holdingObject.GetComponent<Rigidbody>().detectCollisions = true;
+                if (holdingObject.GetComponent<CuttedObject>() != null)
                 {
-                    fartherOrCloserFactor = minHoldingDistance;
+                    holdingObject.GetComponent<CuttedObject>().startTracking();
+                    holdingObject.GetComponent<CuttedObject>().notIstrigger();
                 }
-                if (fartherOrCloserFactor > maxHoldingDistance)
-                {
-                    fartherOrCloserFactor = maxHoldingDistance;
-                }
-            }
-         
-            // if user want to put down the object 
-            if (Input.GetKeyDown(allKeys.putDown)) {
-                if (holdingObject.GetComponent<CuttedObject>().putAllowed()) {
-                    while (status_script.Hands_free(Hands.cutted) != true) ;
-                    holdingObject.GetComponent<Rigidbody>().detectCollisions = true;
-                    if (holdingObject.GetComponent<CuttedObject>() != null) {
-                        holdingObject.GetComponent<CuttedObject>().startTracking();
-                       holdingObject.GetComponent<CuttedObject>().notIstrigger();
-                    }
-                    holdingObject = null;
-                    if (handSlot != null)
-                    {
-                        handSlot.clear();
-                    }                
-                }
-                fartherOrCloserFactor = 1;
-
+                itemPlaced++;
+                itemExist++;
+                ResetToDefault();
             }
 
-            // put the cutted object into the inventory
-            if (Input.GetKeyDown(allKeys.putInInventory)) { 
-                inventory_script.putIn(holdingObject);
-                while (status_script.Hands_free(Hands.cutted) != true) ;
+        }
 
-                holdingObject = null;
-                fartherOrCloserFactor = 1;
-            }
-
-        } 
-
+        // put the cutted object into the inventory
+        if (Input.GetKeyDown(allKeys.putInInventory))
+            PutInInventory();
 	}
 
-    public void deleteCutted()
+    public void PutInInventory()
     {
-        holdingObject = null;
-        fartherOrCloserFactor = 1;
+        inventory_script.putIn(holdingObject);
+        if (status_script.Hands_free(Hands.cutted) != true)
+        {
+            Debug.LogError("Cannot Free Hands while putting cutted object to the inventory");
+        }
+        ResetToDefault();
+    }
+
+    public void deleteCuttedObject(GameObject item)
+    {
+        if (item == holdingObject)
+        {
+            ResetToDefault();
+            if (status_script.Hands_free(Hands.cutted) != true)
+                Debug.LogError("Cannot Free Hands while putting cutted object to the inventory");
+
+        }
+        Destroy(item);
     }
 
     /// <summary>
@@ -180,45 +178,16 @@ public class holdCuttedObject : MonoBehaviour
     /// <param name="ori">The cutted object</param>
     public void putCuttedItemToHand(GameObject ori){
         ori.GetComponent<CuttedObject>().istrigger();
-        //
-        Debug.Log("hObject updated");
-        //
         holdingObject = ori;
 
-        if (handSlot != null)
-        {
-            handSlot.set(holdingObject);
-        }
+        inventoryUI.AddToHandSlot(ori);
 
         status_script.Hands_change(Hands.cutted);
         
-        if(identify(ori).getRegeditValue("pickUpDistance") != null){
-            spawnDistance = (float)identify(ori).getRegeditValue("pickUpDistance");
-        }
-        else{
-            spawnDistance = defaultSpawnDistance;
-        }
+        spawnDistance = identify(ori).getRegeditValue("cuttedSpawnDistance") != null ? (float)identify(ori).getRegeditValue("cuttedSpawnDistance") : defaultSpawnDistance;
+        minHoldingDistance = identify(ori).getRegeditValue("minimumDistance") != null ? (float)identify(ori).getRegeditValue("minimumDistance") : defaultMinHoldingDistance;
+        maxHoldingDistance = identify(ori).getRegeditValue("maximumDistance") != null ? (float)identify(ori).getRegeditValue("maximumDistance") : defaultMaxHoldingDistance;
         fartherOrCloserFactor = 1;
-        
-    }
-
-    /// <summary>
-    /// This method is called when the player want to take out an object from the inventory. 
-    /// It will take the position as the parameter and get that object in the inventory class
-    /// </summary>
-    /// <param name="num">The position of that object</param>
-    public void takeOut(int num)
-    {
-        if (!status_script.Hands_available()) {
-            return;
-        }
-        GameObject ret = this.GetComponent<inventory>().takeOut(num);
-        if (ret != null) {
-            putCuttedItemToHand(ret);
-        } else {
-            print("Error");
-        }
-       
     }
 
     /// <summary>
@@ -231,5 +200,33 @@ public class holdCuttedObject : MonoBehaviour
         Vector3 playerDirection = playerCamera.transform.forward;
         Vector3 spawnPos = playerPos + playerDirection * spawnDistance * fartherOrCloserFactor;
         return spawnPos;
+    }
+
+    private void ResetToDefault()
+    {
+        holdingObject = null;
+        fartherOrCloserFactor = 1;
+        minHoldingDistance = defaultMinHoldingDistance;
+        maxHoldingDistance = defaultMaxHoldingDistance;
+        inventoryUI.RemoveFromHandSlot();
+    }
+
+    /// <summary>
+    /// This method is used to test if the player is allowed to put more item into the scene
+    /// </summary>
+    /// <returns>True if not exceed the limitation, false otherwise</returns>
+    private bool PutDuplicatedObjectAllowed()
+    {
+        if (limitationType == DuplicatedObjectPlacingType.None) return true;
+        else if (limitationType == DuplicatedObjectPlacingType.itemExist) return itemExist < duplicatedLimitation;
+        else return itemPlaced < duplicatedLimitation;
+     }
+
+    /// <summary>
+    /// This method will be called when deduplication happened
+    /// </summary>
+    public void DestoriedDuplicatedObjectFromScene()
+    {
+        itemExist--;
     }
 }

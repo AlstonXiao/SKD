@@ -17,7 +17,7 @@ public class PhysicsOfPlayer : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
-
+        
         // no rigidbody
         if (body == null || body.isKinematic)
         {
@@ -38,6 +38,22 @@ public class PhysicsOfPlayer : MonoBehaviour
         // then you can also multiply the push velocity by that.
 
         // Apply the push
-        body.velocity = pushDir * pushPower;
+
+        if (body.mass <= 100000)
+        {
+            if (body.mass <= 1000)
+            {
+                pushDir = pushDir * pushPower;
+            }
+            else
+            {
+                pushDir = pushDir * pushPower / ((body.mass / 1000) / 10);
+            }
+        }
+        else
+        {
+            pushDir = new Vector3(0, 0, 0);
+        }
+        body.AddForceAtPosition(pushDir, hit.point, ForceMode.Impulse);
     }
 }

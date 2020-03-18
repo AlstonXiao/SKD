@@ -31,6 +31,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         #pragma warning restore CS0649
 
         private Camera m_Camera;
+        private bool rotateCamera;
         private bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
@@ -47,6 +48,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float jump_time;
         private float default_jump_duration;
         private float default_jump_amount;
+        private player_status playerStatus;
 
         // Use this for initialization
         private void Start()
@@ -63,6 +65,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			m_MouseLook.Init(transform , m_Camera.transform);
             default_jump_duration = m_JumpBob.BobDuration;
             default_jump_amount = m_JumpBob.BobAmount;
+            rotateCamera = true;
+            playerStatus = GetComponent<player_status>();
         }
 
 
@@ -70,7 +74,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             // rotate the camera
-            RotateView();
+            if (rotateCamera)
+            {
+                RotateView();
+            }
             // the jump state needs to read here to make sure it is not missed
             // learn if player choosed to jump
             if (!m_Jump)
@@ -117,15 +124,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void FixedUpdate()
         {
             float speed;
+            
             GetInput(out speed);
+            
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove = transform.forward* Input.GetAxis("Vertical") + transform.right* Input.GetAxis("Horizontal");
-
+            if (!playerStatus.Scree_free())
+            {
+                desiredMove = new Vector3(0, 0, 0);
+            }
+                
             // get a normal for the surface that is being touched to move along it
-            // RaycastHit hitInfo;
-            // Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-            //                   m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
-            // desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+            RaycastHit hitInfo;
+            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+                              m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
             desiredMove = desiredMove.normalized;
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
@@ -286,18 +299,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            Rigidbody body = hit.collider.attachedRigidbody;
-            //dont move the rigidbody if the character is on top of it
-            if (m_CollisionFlags == CollisionFlags.Below)
-            {
-                return;
-            }
+            //Rigidbody body = hit.collider.attachedRigidbody;
+            ////dont move the rigidbody if the character is on top of it
+            //if (m_CollisionFlags == CollisionFlags.Below)
+            //{
+            //    return;
+            //}
 
-            if (body == null || body.isKinematic)
-            {
-                return;
-            }
-            body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+            //if (body == null || body.isKinematic)
+            //{
+            //    return;
+            //}
+            //body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+        }
+
+        public void ToggleRotation(bool allowRotation)
+        {
+            this.rotateCamera = allowRotation;
         }
     }
 }
