@@ -174,6 +174,15 @@ public class pickUpObject : MonoBehaviour {
         {
             Debug.LogWarning("There is no items on hand when drop items is called");
         }
+        // Debug.Log("Y coord: " + picked.transform.position.y);
+        double height = picked.GetComponent<Renderer>().bounds.size.y;
+        Debug.Log("Height: " + height);
+        //Debug.Log("Height (Scale): " + picked.GetComponent<Renderer>().bounds.size.y * picked.transform.localScale.y);
+        if (picked.transform.position.y - (0.5*height) < 100)
+        {
+            return;
+        }
+
         DropHelp(picked);
         if (!status_script.Hands_free(Hands.pickUpAble))
         {
@@ -181,7 +190,7 @@ public class pickUpObject : MonoBehaviour {
         }
         float pickUpScale = (float)(identify(picked).getRegeditValue("pickUpScale") == null ? defaultPickUpScale : identify(picked).getRegeditValue("pickUpScale"));
         InventoryUI.instance.RemoveFromHandSlot();
-        picked.transform.localPosition = new Vector3(0, picked.transform.localPosition.y, 500);
+        picked.transform.localPosition = new Vector3(0, picked.transform.localPosition.y, 1000);
         picked.transform.localScale *= 1/pickUpScale;
         picked.transform.SetParent((UnityEngine.Transform)identify(picked).getRegeditValue("originalParent"));
         picked = null;
