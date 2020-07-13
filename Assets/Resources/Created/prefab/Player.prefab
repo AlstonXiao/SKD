@@ -189,7 +189,7 @@ MonoBehaviour:
   m_WalkSpeed: 3
   m_RunSpeed: 4.5
   m_RunstepLenghten: 0.7
-  m_JumpSpeed: 4.5
+  m_JumpSpeed: 8
   m_StickToGroundForce: 8
   m_GravityMultiplier: 2
   m_MouseLook:
@@ -464,7 +464,7 @@ MonoBehaviour:
     largerKey: 122
     smallerKey: 120
   spawnDistance: 6
-  maxGem: 5
+  maxGem: 10
   scaleSpeed: 8
   fartherSpeed: 30
   minimunDistance: 0.2

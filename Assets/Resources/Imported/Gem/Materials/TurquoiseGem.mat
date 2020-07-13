@@ -5,7 +5,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: TurquoiseGem
   m_Shader: {fileID: 4800000, guid: 4443140fbd110a7011005aba44295342, type: 3}
   m_ShaderKeywords: 
@@ -37,11 +38,11 @@ Material:
     m_Floats:
     - _Emission: 0.19
     - _Emissive: 0
-    - _EnvironmentLight: 1.31
+    - _EnvironmentLight: 1.1
     - _IndexOfRefraction: 2.14
-    - _ReflectionStrength: 1.08
+    - _ReflectionStrength: 1.1
     m_Colors:
-    - _Color: {r: 0.61931795, g: 0.9435569, b: 0.8464332, a: 1}
+    - _Color: {r: 0.76557493, g: 0.8679245, b: 0.83709633, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

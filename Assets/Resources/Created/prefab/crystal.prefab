@@ -58,10 +58,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a58941bbd115a7011005aba44295342, type: 2}
+  - {fileID: 2100000, guid: 9ff4939ce1b2b8f4db7a3de19775f7d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +99,7 @@ MonoBehaviour:
   connected: {fileID: 0}
   collids: []
   picked_material: {fileID: 2100000, guid: 2217566ddbee1544cbacbcc7806e6ebc, type: 2}
-  unpick_material: {fileID: 2100000, guid: 0a58941bbd115a7011005aba44295342, type: 2}
+  unpick_material: {fileID: 2100000, guid: 9ff4939ce1b2b8f4db7a3de19775f7d7, type: 2}
   player: {fileID: 0}
 --- !u!65 &65784555640184056
 BoxCollider:

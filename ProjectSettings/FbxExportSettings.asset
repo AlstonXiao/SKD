@@ -12,10 +12,12 @@
         "integrationSavePath": "",
         "selectedDCCApp": 0,
         "prefabSavePaths": [
+            "Resources/Created/prefab/Generic_items",
             "Resources/Created/prefab",
             "."
         ],
         "fbxSavePaths": [
+            "Resources/Created/prefab/Generic_items",
             "Resources/Created/FBX",
             "Resources/Created/prefab",
             "."

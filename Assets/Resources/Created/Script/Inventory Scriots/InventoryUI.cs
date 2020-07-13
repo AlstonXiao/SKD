@@ -22,7 +22,8 @@ public class InventoryUI : MonoBehaviour
     public Light                inventoryLight; 
     [Space(10)]
     public GameObject           player;
-    public Camera               Camera; 
+    public Camera               Camera;
+    public GameObject           crosshair; // black square in middle of screen
 
     [Space(10)]
     [Header("Debug")]
@@ -83,6 +84,9 @@ public class InventoryUI : MonoBehaviour
                     player.GetComponent<FirstPersonController>().ToggleRotation(true);
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
+
+                    // Show cross hair
+                    crosshair.SetActive(true);
                     
                     UIActive = false;
                 }
@@ -109,7 +113,9 @@ public class InventoryUI : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                     UIActive = true;
-                    
+
+                    crosshair.SetActive(false);
+
                 }
                 else
                 {

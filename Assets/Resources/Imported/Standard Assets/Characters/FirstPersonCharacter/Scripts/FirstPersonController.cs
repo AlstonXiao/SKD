@@ -49,11 +49,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float default_jump_duration;
         private float default_jump_amount;
         private player_status playerStatus;
-
+        private float m_jumpAngleLimit;
         // Use this for initialization
+        // Private debug
+
         private void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
+            m_jumpAngleLimit = 90 - m_CharacterController.slopeLimit;
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
             m_FovKick.Setup(m_Camera);
@@ -83,6 +86,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                // Check the normal of the ground and see if it is allowed to jump
+                RaycastHit hitInfo;
+                if (Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+                                  m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                {
+                    Vector3 hitNormal = hitInfo.normal;
+                    float angle = (float)(Math.Atan(hitNormal.y / Vector3.Distance(new Vector3(0, 0, 0), new Vector3(hitNormal.x, 0, hitNormal.z))) / Math.PI * 180);
+                    if (angle < m_jumpAngleLimit)
+                    {
+                        m_Jump = false;
+                    }
+                }
             }
             // transition from jumping to ground
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -99,6 +114,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
+                m_Jump = false;
             }
             if (m_PreviouslyGrounded && !m_CharacterController.isGrounded) {
                 jump_time = Time.time;
@@ -128,22 +144,40 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GetInput(out speed);
             
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward* Input.GetAxis("Vertical") + transform.right* Input.GetAxis("Horizontal");
+            Vector3 desiredMove = transform.forward* (float)Math.Pow(Input.GetAxis("Vertical"),7) + transform.right* (float)Math.Pow(Input.GetAxis("Horizontal"),7);
+            
             if (!playerStatus.Scree_free())
             {
                 desiredMove = new Vector3(0, 0, 0);
             }
-                
+
+            // This is the correction for slope. The player are forced to slide down the slope if it is too steep
+            Vector3 slopeAdded = new Vector3(0, 0, 0);    
+
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
-            Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                              m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+            if (Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+                              m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            {
+                Vector3 hitNormal = hitInfo.normal;
+                // if the angle exceed the limit
+                float angle = (float)(Math.Atan(hitNormal.y / Vector3.Distance(new Vector3(0, 0, 0), new Vector3(hitNormal.x, 0, hitNormal.z))) / Math.PI * 180);
+                if (angle < m_jumpAngleLimit)
+                {
+                    Vector3 downVector = new Vector3(0, -m_StickToGroundForce, 0);
+                    slopeAdded = Vector3.ProjectOnPlane(downVector, hitInfo.normal);
+                    slopeAdded.y = 0;
+                }
+
+            }
+            
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-            desiredMove = desiredMove.normalized;
+            // print(desiredMove);
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
             m_MoveDir.x *= 2;
             m_MoveDir.z *= 2;
+                       
 
             if (m_CharacterController.isGrounded)
             {
@@ -158,9 +192,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     m_Jump = false;
                     m_Jumping = true;
                 }
+                // if the player is on the ground, apply this correction
+                m_MoveDir += slopeAdded;
             }
             else
             {
+                m_Jump = false;
                 if (m_MoveDir.x != 0 || m_MoveDir.z != 0)
                 {
                     speedbeforeJump = m_MoveDir;
@@ -174,7 +211,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
                 //print(m_MoveDir);
             }
-            // print(m_MoveDir);
+            //print(m_MoveDir);
+            
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
@@ -182,6 +220,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.UpdateCursorLock();
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            // Gizmos.color = Color.red;
+            // Debug.DrawLine(transform.position, transform.position + Vector3.down * hitDistance);
+            // Gizmos.DrawWireSphere(transform.position + Vector3.down * hitDistance, (float)0.5);
+        }
 
         private void PlayJumpSound()
         {

@@ -619,6 +619,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 3113798880196423223}
+    - target: {fileID: 1148160497033104782, guid: ad3c07f4645f83c4faf803208ff865b0,
+        type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 1299987841}
     - target: {fileID: 1148160497033104787, guid: ad3c07f4645f83c4faf803208ff865b0,
         type: 3}
       propertyPath: m_Name
@@ -1435,10 +1440,6 @@ PrefabInstance:
     - target: {fileID: 1188798418, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: defaultPickUpScale
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1188798420, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: maxGem
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 30785219261803399, guid: 5e9e851c0e142814dac026a256ba2ac0,
         type: 3}
