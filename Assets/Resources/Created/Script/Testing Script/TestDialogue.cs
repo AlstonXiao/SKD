@@ -18,16 +18,18 @@ public class TestDialogue : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        //    if (collision.gameObject.tag == "Player")
-        //    {
+        Debug.Log(other.gameObject);
+        if (other.gameObject.tag == "Player")
+            {
+         //   Debug.Log("true");
         //Debug.Break();
         //dialogueT.GetComponent<DialogueTrigger>().dialogue = dp.GetComponent<DialogueParser>().Next();
         Dialogue d = dialogueP.Next();
         dialogueT.GetComponent<DialogueTrigger>().TriggerDialogue(d);
 
-        //    }
+            }
     }
 }
 

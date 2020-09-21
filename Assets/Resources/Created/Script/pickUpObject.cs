@@ -113,6 +113,8 @@ public class pickUpObject : MonoBehaviour {
                     picked.transform.SetParent(displayCanvas.transform);
                     picked.transform.localPosition = placedPosition;
                     picked.transform.localScale = (float)pickUpScale * picked.transform.localScale;
+                    // Scale with screen size?
+                    // picked.transform.localScale = (float)pickUpScale * picked.transform.localScale * (Screen.width / 900);
                 }
 
             }
@@ -176,12 +178,13 @@ public class pickUpObject : MonoBehaviour {
         }
         // Debug.Log("Y coord: " + picked.transform.position.y);
         double height = picked.GetComponent<Renderer>().bounds.size.y;
-        Debug.Log("Height: " + height);
+        //Debug.Log("Height: " + height);
         //Debug.Log("Height (Scale): " + picked.GetComponent<Renderer>().bounds.size.y * picked.transform.localScale.y);
-        if (picked.transform.position.y - (0.5*height) < 100)
-        {
-            return;
-        }
+        //if (picked.transform.position.y - (0.5*height) < 100)
+        //{
+        //
+        //    return;
+        //}
 
         DropHelp(picked);
         if (!status_script.Hands_free(Hands.pickUpAble))
@@ -190,7 +193,16 @@ public class pickUpObject : MonoBehaviour {
         }
         float pickUpScale = (float)(identify(picked).getRegeditValue("pickUpScale") == null ? defaultPickUpScale : identify(picked).getRegeditValue("pickUpScale"));
         InventoryUI.instance.RemoveFromHandSlot();
-        picked.transform.localPosition = new Vector3(0, picked.transform.localPosition.y, 1000);
+        if (picked.transform.position.y - (0.5 * height) < 100)
+        {
+            Debug.Log("Too low, moving object higher"); // Prevents the object from going through the floor
+            picked.transform.localPosition = new Vector3(0, (int) (500 + (0.5 * height)), 1000);
+        }
+        else
+        {
+            Debug.Log("Placed");
+            picked.transform.localPosition = new Vector3(0, picked.transform.localPosition.y + 150, 1000);
+        }
         picked.transform.localScale *= 1/pickUpScale;
         picked.transform.SetParent((UnityEngine.Transform)identify(picked).getRegeditValue("originalParent"));
         picked = null;
